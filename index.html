@@ -3,135 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlobeGuide AI | Premium AI Travel Itinerary Planner</title>
+    <title>GlobeGuide AI | Luxury Travel Planner</title>
     
     <meta name="google-site-verification" content="pek_oHFsRrtgR_Y6ti-HMARB3N1V5Zg0nqj-YD_eIKc" />
     <meta name="google-site-verification" content="XgriFXyJ2kBxp_XLdOugWo2Q3ifdF8wil6UqHaD877E" />
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        :root { --primary: #2563eb; --bg: #f8fafc; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #0f172a; scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
+        .hero-mesh { background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.08) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.08) 0px, transparent 50%); }
         
-        .prose h2 { font-size: 2.25rem !important; font-weight: 800 !important; color: #1e3a8a !important; margin-top: 3.5rem !important; border-left: 6px solid #2563eb; padding-left: 1.5rem; text-transform: uppercase; }
-        .hero-mesh { background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%); }
-        .search-container { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 40px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.06); }
-        .section-card { background: white; border-radius: 40px; border: 1px solid #f1f5f9; transition: transform 0.3s ease; }
-        .blog-card:hover { transform: translateY(-10px); }
+        /* تحسين تنظيم الإجابة */
+        #output h2 { font-size: 1.8rem; font-weight: 800; color: #1e3a8a; border-left: 5px solid #2563eb; padding-left: 15px; margin-bottom: 20px; }
+        #output h3 { font-size: 1.3rem; font-weight: 700; color: #2563eb; margin-top: 25px; }
+        #output p { color: #475569; line-height: 1.8; margin-bottom: 15px; }
+        #output ul { list-style: none; padding: 0; }
+        #output li { background: #f1f5f9; padding: 10px 15px; border-radius: 12px; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; }
+
+        .blog-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .blog-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.1); }
     </style>
 </head>
 
-<body class="hero-mesh min-h-screen">
-    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center sticky top-0 z-50 bg-white/60 backdrop-blur-md border-b border-white/20">
+<body class="hero-mesh">
+    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-slate-100">
         <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg"><span class="text-white font-black italic text-xl">G</span></div>
-            <span class="text-xl font-extrabold tracking-tighter">GlobeGuide<span class="text-blue-600">.ai</span></span>
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200 text-white font-black italic">G</div>
+            <span class="text-xl font-extrabold tracking-tighter italic">GlobeGuide<span class="text-blue-600">.ai</span></span>
         </div>
-        <div class="hidden md:flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
-            <a href="#how-it-works" class="hover:text-blue-600">How it Works</a>
-            <a href="#blog" class="hover:text-blue-600">Travel Guides</a>
+        <div class="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
+            <a href="#how" class="hover:text-blue-600">Method</a>
+            <a href="#blog" class="hover:text-blue-600">Exploration</a>
             <a href="contact.html" class="hover:text-blue-600">Contact</a>
         </div>
-        <a href="mailto:mohammedissmaili101@gmail.com" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full shadow-xl hover:bg-blue-600 transition">Support</a>
     </nav>
 
-    <main class="max-w-5xl mx-auto px-6 pt-16 pb-24 text-center">
-        <h1 class="text-5xl md:text-8xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">Stop Searching. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-serif italic">Start Exploring.</span></h1>
-        
-        <div class="search-container p-3 max-w-4xl mx-auto flex flex-col md:flex-row gap-2 mb-10">
-            <div class="flex-1 flex items-center px-6">
-                <span class="text-xl mr-3">📍</span>
-                <input id="city" type="text" placeholder="Where do you want to go?" class="w-full bg-transparent py-4 outline-none font-bold text-slate-700">
+    <main class="max-w-5xl mx-auto px-6 pt-20">
+        <div class="text-center mb-20">
+            <h1 class="text-6xl md:text-8xl font-black text-slate-900 mb-8 tracking-tighter leading-[0.9]">Beyond <span class="text-blue-600 italic">Travel.</span></h1>
+            <p class="text-slate-500 text-xl max-w-2xl mx-auto mb-12">The world's first neural-network travel concierge for high-net-worth explorers.</p>
+            
+            <div class="bg-white p-3 rounded-[40px] shadow-2xl flex flex-col md:flex-row gap-2 max-w-4xl mx-auto border border-slate-100">
+                <input id="city" type="text" placeholder="Enter City (e.g. Paris, Tokyo, Dubai)" class="flex-1 px-8 py-4 outline-none font-bold text-slate-700">
+                <select id="days" class="px-6 py-4 outline-none font-bold text-slate-500 border-x border-slate-50">
+                    <option value="3">3 Days</option><option value="5">5 Days</option><option value="7">7 Days</option>
+                </select>
+                <button onclick="planMyTrip()" class="bg-blue-600 text-white font-black px-12 py-5 rounded-[32px] hover:bg-blue-700 transition-all uppercase text-xs tracking-widest">Plan Experience</button>
             </div>
-            <select id="days" class="bg-transparent px-6 py-4 outline-none font-bold text-slate-500 border-x">
-                <option value="3">3 Days</option><option value="5">5 Days</option><option value="7">7 Days</option>
-            </select>
-            <button id="planBtn" onclick="planMyTrip()" class="bg-blue-600 text-white font-black px-12 py-5 rounded-[32px] text-sm uppercase tracking-widest hover:shadow-2xl transition-all">Plan Trip</button>
         </div>
 
-        <div id="loader" class="hidden flex flex-col items-center mb-10">
-            <div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            <p class="text-blue-600 font-bold text-[10px] uppercase tracking-[0.2em] mt-4 italic">Designing your premium experience...</p>
+        <div id="loader" class="hidden flex flex-col items-center mb-20">
+            <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
         </div>
 
-        <div id="output" class="hidden text-left section-card p-8 md:p-16 mb-24 shadow-2xl"></div>
+        <div id="output" class="hidden mb-32"></div>
 
-        <section id="how-it-works" class="py-20 text-left">
-            <h2 class="text-4xl font-black mb-12 italic tracking-tighter">Revolutionizing Travel Planning</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="section-card p-8 bg-blue-600 text-white">
-                    <span class="text-4xl mb-4 block">🧠</span>
-                    <h3 class="text-xl font-bold mb-2">AI Architecture</h3>
-                    <p class="opacity-80 text-sm leading-relaxed">We use the world's most advanced LLMs to analyze millions of travel data points to create your itinerary.</p>
-                </div>
-                <div class="section-card p-8">
-                    <span class="text-4xl mb-4 block">📍</span>
-                    <h3 class="text-xl font-bold mb-2">Precision Mapping</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Integrated Google Maps data ensures your logistics are optimized for travel time and distance.</p>
-                </div>
-                <div class="section-card p-8">
-                    <span class="text-4xl mb-4 block">📄</span>
-                    <h3 class="text-xl font-bold mb-2">Export Ready</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">One-click PDF generation allows you to carry your professional guide anywhere, offline.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="blog" class="py-20 text-left">
-            <h2 class="text-4xl font-black mb-12 italic tracking-tighter">Popular Destinations</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="section-card overflow-hidden blog-card">
-                    <img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=800&q=80" alt="Marrakesh Guide" class="w-full h-48 object-cover">
-                    <div class="p-8">
-                        <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest">Travel Insights</span>
-                        <h3 class="text-2xl font-black mt-2 mb-4">Ultimate 3-Day Luxury Guide to Marrakesh</h3>
-                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Discover the hidden riads, premium spas, and the best artisan shops in the heart of the Red City.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase tracking-tighter hover:underline">Read Full Article →</a>
+        <section id="blog" class="py-20">
+            <h2 class="text-4xl font-black mb-12 italic tracking-tighter border-b-4 border-blue-600 inline-block">Global Intelligence</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-[32px] overflow-hidden blog-card border border-slate-50">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400" class="h-48 w-full object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2">7 Secret Rooftops in Paris No Tourist Knows</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed">The ultimate guide to elevated Parisian luxury and hidden views.</p>
                     </div>
                 </div>
-                <div class="section-card overflow-hidden blog-card">
-                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80" alt="London Guide" class="w-full h-48 object-cover">
-                    <div class="p-8">
-                        <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest">Global Escapes</span>
-                        <h3 class="text-2xl font-black mt-2 mb-4">A Professional Walkthrough of Modern London</h3>
-                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">From the Shard to the hidden streets of Soho, experience London like a professional traveler.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase tracking-tighter hover:underline">Read Full Article →</a>
+                <div class="bg-white rounded-[32px] overflow-hidden blog-card border border-slate-50">
+                    <img src="https://images.unsplash.com/photo-1540959733332-e946670b24b9?w=400" class="h-48 w-full object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2">Digital Nomad's Guide to Tokyo Suburbs</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed">Where high-speed tech meets traditional Japanese serenity.</p>
                     </div>
+                </div>
+                <div class="bg-white rounded-[32px] overflow-hidden blog-card border border-slate-50">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400" class="h-48 w-full object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg mb-2">Dubai 2026: The Future of Luxury Real Estate</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed">Investing in the world's most ambitious skyline.</p>
+                    </div>
+                </div>
+                <div class="p-6 border-2 border-dashed border-slate-200 rounded-[32px] flex flex-col justify-center">
+                    <h4 class="font-black text-blue-600 uppercase text-[10px] tracking-widest mb-4">Trending Now</h4>
+                    <ul class="text-sm font-bold space-y-3 text-slate-700">
+                        <li>• <a href="#" class="hover:text-blue-600 italic">The Rise of Eco-Luxury in Iceland</a></li>
+                        <li>• <a href="#" class="hover:text-blue-600 italic">Best Michelin Stars in New York 2026</a></li>
+                        <li>• <a href="#" class="hover:text-blue-600 italic">Sustainable Safari: Tanzania's Best</a></li>
+                        <li>• <a href="#" class="hover:text-blue-600 italic">Santorini's Quietest Villages Exposed</a></li>
+                        <li>• <a href="#" class="hover:text-blue-600 italic">Bali for High-Performance CEOs</a></li>
+                        <li>• <a href="#" class="hover:text-blue-600 italic">Rome: A Historical Deep-Dive Guide</a></li>
+                        <li>• <a href="#" class="hover:text-blue-600 italic">Marrakech: Artisan Craftsmanship Guide</a></li>
+                    </ul>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-white border-t border-slate-100 pt-20 pb-10">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 text-left mb-20">
-            <div class="col-span-2">
-                <div class="flex items-center gap-2 mb-6">
-                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg"><span class="text-white font-black italic text-sm">G</span></div>
-                    <span class="text-lg font-extrabold tracking-tighter">GlobeGuide<span class="text-blue-600">.ai</span></span>
-                </div>
-                <p class="text-slate-400 text-sm max-w-xs leading-relaxed italic">The next-generation AI travel concierge. Crafted by Focushive Professional Services for the modern global explorer.</p>
-            </div>
+    <footer class="bg-slate-900 text-white pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 mb-20">
             <div>
-                <h4 class="text-xs font-black uppercase tracking-widest mb-6">Legal</h4>
-                <ul class="space-y-4 text-xs font-bold text-slate-500">
-                    <li><a href="privacy.html" class="hover:text-blue-600">Privacy Policy</a></li>
-                    <li><a href="terms.html" class="hover:text-blue-600">Terms of Service</a></li>
-                </ul>
+                <h4 class="font-black italic text-2xl mb-6">GlobeGuide<span class="text-blue-500">.ai</span></h4>
+                <p class="text-slate-400 text-sm italic">Engineered by Focushive Professional Services. Redefining the algorithms of travel.</p>
             </div>
-            <div>
-                <h4 class="text-xs font-black uppercase tracking-widest mb-6">Support</h4>
-                <ul class="space-y-4 text-xs font-bold text-slate-500">
-                    <li><a href="contact.html" class="hover:text-blue-600">Contact Us</a></li>
-                    <li><a href="mailto:mohammedissmaili101@gmail.com" class="hover:text-blue-600">Direct Email</a></li>
-                </ul>
+            <div class="flex flex-col gap-4 text-sm font-bold">
+                <a href="privacy.html" class="hover:text-blue-500">Privacy</a>
+                <a href="terms.html" class="hover:text-blue-500">Terms</a>
+                <a href="contact.html" class="hover:text-blue-500">Contact</a>
+            </div>
+            <div class="text-sm text-slate-400">
+                <p>Meknes Office, Morocco</p>
+                <p>mohammedissmaili101@gmail.com</p>
             </div>
         </div>
-        <div class="text-center border-t border-slate-50 pt-10 px-6">
-            <p class="text-slate-300 text-[10px] font-bold uppercase tracking-[0.3em]">© 2026 GlobeGuide AI Platform | Focushive Professional</p>
-        </div>
+        <p class="text-center text-[10px] text-slate-500 tracking-[0.5em] uppercase">© 2026 GLOBEGUIDE AI | ALL RIGHTS RESERVED</p>
     </footer>
 
     <script>
@@ -140,10 +126,9 @@
             const days = document.getElementById('days').value;
             const output = document.getElementById('output');
             const loader = document.getElementById('loader');
-            const btn = document.getElementById('planBtn');
 
-            if(!city) return alert("Please enter a destination city.");
-            loader.classList.remove('hidden'); output.classList.add('hidden'); btn.disabled = true;
+            if(!city) return alert("Destination required.");
+            loader.classList.remove('hidden'); output.classList.add('hidden');
 
             try {
                 const response = await fetch('/api/generate', {
@@ -152,32 +137,28 @@
                     body: JSON.stringify({ city, days })
                 });
                 const data = await response.json();
-                const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"></iframe>`;
+                
+                const map = `<iframe width="100%" height="400" style="border-radius:32px; margin-bottom:40px;" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=12&output=embed" frameborder="0"></iframe>`;
 
                 output.innerHTML = `
-                    <div id="pdf-area" class="p-2">
-                        <div class="flex justify-between items-center mb-12 pb-8 border-b border-slate-100">
-                            <div>
-                                <h2 style="border:none; margin:0; font-size: 2.5rem; font-weight: 900;">${city.toUpperCase()}</h2>
-                                <p class="text-blue-600 font-bold text-xs uppercase tracking-[0.2em] mt-2 italic">Hyper-Detailed Master Itinerary</p>
-                            </div>
-                            <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full shadow-xl">DOWNLOAD PDF</button>
+                    <div id="pdf-area">
+                        <div class="flex justify-between items-center mb-10 border-b border-slate-100 pb-8">
+                            <h2 style="border:none; margin:0; font-size:3rem;">${city.toUpperCase()}</h2>
+                            <button onclick="downloadPDF()" class="bg-slate-900 text-white px-8 py-3 rounded-full text-[10px] font-black tracking-widest">DOWNLOAD PDF</button>
                         </div>
-                        ${genericMap}
-                        <div class="prose prose-slate max-w-none">${data.content}</div>
+                        ${map}
+                        <div class="itinerary-content">${data.content}</div>
                     </div>
                 `;
                 output.classList.remove('hidden');
-                window.scrollTo({ top: output.offsetTop - 100, behavior: 'smooth' });
-            } catch (e) { alert("Engine busy. Refresh and try again."); }
-            finally { loader.classList.add('hidden'); btn.disabled = false; }
+                window.scrollTo({ top: output.offsetTop - 50, behavior: 'smooth' });
+            } catch (e) { alert("Error."); }
+            finally { loader.classList.add('hidden'); }
         }
 
         function downloadPDF() {
             const element = document.getElementById('pdf-area');
-            const cityName = document.getElementById('city').value;
-            const opt = { margin: 0.5, filename: `Guide-${cityName}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } };
-            html2pdf().set(opt).from(element).save();
+            html2pdf().set({ margin: 0.5, filename: 'Itinerary.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(element).save();
         }
     </script>
 </body>
