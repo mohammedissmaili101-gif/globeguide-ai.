@@ -3,216 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlobeGuide AI | Premium AI Travel Itinerary Planner</title>
-    
-    <meta name="google-site-verification" content="XgriFXyJ2kBxp_XLdOugWo2Q3ifdF8wil6UqHaD877E" />
-    <meta name="description" content="Generate bespoke, high-fidelity travel itineraries with GlobeGuide AI. The world's smartest AI concierge for modern travelers.">
-    <meta name="keywords" content="travel planner, AI itinerary, travel guide, GlobeGuide, Focushive">
-    
+    <title>GlobeGuide AI | Premium Itinerary Planner</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #2563eb; --bg: #f8fafc; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #0f172a; overflow-x: hidden; }
-        
-        /* Premium Typography for AI Results */
-        .prose h2 {
-            font-size: 2.25rem !important;
-            font-weight: 800 !important;
-            color: #1e3a8a !important;
-            margin-top: 3.5rem !important;
-            margin-bottom: 1.5rem !important;
-            border-left: 6px solid #2563eb;
-            padding-left: 1.5rem;
-            line-height: 1.2;
-            text-transform: uppercase;
-            letter-spacing: -0.025em;
-        }
-        .prose h3 {
-            font-size: 1.5rem !important;
-            font-weight: 700 !important;
-            color: #2563eb !important;
-            margin-top: 2rem !important;
-            margin-bottom: 0.75rem !important;
-        }
-        .prose p {
-            font-size: 1.125rem !important;
-            line-height: 1.8 !important;
-            color: #475569 !important;
-            margin-bottom: 1.5rem !important;
-        }
-        .prose ul {
-            list-style-type: disc !important;
-            padding-left: 2rem !important;
-            margin-bottom: 2rem !important;
-        }
-        .prose li { margin-bottom: 0.75rem; color: #475569; }
-        .prose img { width: 100%; border-radius: 24px; margin: 24px 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-
-        .hero-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
-                              radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
-        }
-
-        .search-container {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.06);
-            border-radius: 40px;
-        }
-
-        .btn-premium {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-premium:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
-        }
-
-        .results-area { animation: slideUp 0.6s ease-out forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: #0f172a; }
+        .prose h2 { font-size: 2rem; font-weight: 800; color: #1e3a8a; margin: 2rem 0 1rem; border-left: 5px solid #2563eb; padding-left: 1rem; }
+        .prose h3 { font-size: 1.4rem; font-weight: 700; color: #2563eb; margin-top: 1.5rem; }
+        .prose p { line-height: 1.7; color: #475569; margin-bottom: 1rem; }
+        .itinerary-img { width: 100%; border-radius: 20px; margin: 1.5rem 0; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: block; }
+        .map-frame { width: 100%; height: 350px; border-radius: 20px; margin-bottom: 2rem; border: none; }
+        .hero-gradient { background: radial-gradient(circle at top right, #e0e7ff, transparent), radial-gradient(circle at top left, #f1f5f9, transparent); }
     </style>
 </head>
+<body class="hero-gradient min-h-screen">
 
-<body class="hero-mesh min-h-screen">
-    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
-        <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/20">
-                <span class="text-white font-black italic text-xl">G</span>
-            </div>
-            <span class="text-xl font-extrabold tracking-tighter">GlobeGuide<span class="text-blue-600">.ai</span></span>
-        </div>
-        <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
-            <a href="#about" class="hover:text-blue-600 transition">How it works</a>
-            <a href="mailto:mohammedissmaili101@gmail.com" class="hover:text-blue-600 transition">Support</a>
-        </div>
-        <a href="mailto:mohammedissmaili101@gmail.com" class="text-xs font-bold bg-white border border-slate-200 px-6 py-3 rounded-full hover:bg-slate-50 transition shadow-sm">Contact</a>
+    <nav class="p-8 max-w-7xl mx-auto flex justify-between items-center">
+        <div class="font-black text-2xl tracking-tighter">GlobeGuide<span class="text-blue-600">.ai</span></div>
+        <a href="mailto:mohammedissmaili101@gmail.com" class="text-sm font-bold bg-white px-6 py-2 rounded-full shadow-sm">Support</a>
     </nav>
 
-    <main class="max-w-5xl mx-auto px-6 pt-16 pb-24 text-center">
-        <div class="inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full mb-8">
-            <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            <span class="text-[10px] font-black text-blue-600 uppercase tracking-[0.2em]">Next-Gen Travel Engine</span>
-        </div>
-
-        <h1 class="text-5xl md:text-8xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">
-            Stop Searching. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-serif italic">Start Exploring.</span>
-        </h1>
+    <main class="max-w-4xl mx-auto px-6 py-12 text-center">
+        <h1 class="text-6xl font-black mb-6 tracking-tight">Your Next Adventure, <br><span class="text-blue-600 italic font-serif">AI-Perfected.</span></h1>
         
-        <p class="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto mb-16 font-medium">
-            Personalized, high-fidelity travel itineraries crafted in seconds by the world's most advanced AI concierge.
-        </p>
-
-        <div class="search-container p-3 max-w-4xl mx-auto flex flex-col md:flex-row gap-2">
-            <div class="flex-1 flex items-center px-6">
-                <span class="text-xl mr-3">📍</span>
-                <input id="city" type="text" placeholder="Where do you want to go?" class="w-full bg-transparent py-4 outline-none font-bold text-slate-700 placeholder-slate-300">
-            </div>
-            
-            <div class="flex items-center px-6 border-y md:border-y-0 md:border-x border-slate-100">
-                <span class="text-xl mr-3">📅</span>
-                <select id="days" class="bg-transparent py-4 outline-none font-bold text-slate-500 cursor-pointer">
-                    <option value="3">3 Days</option>
-                    <option value="5">5 Days</option>
-                    <option value="7">7 Days</option>
-                </select>
-            </div>
-
-            <button id="planBtn" onclick="planMyTrip()" class="btn-premium text-white font-black px-12 py-5 rounded-[32px] shadow-xl text-sm uppercase tracking-widest">
-                Plan Trip
-            </button>
+        <div class="bg-white p-4 rounded-[35px] shadow-xl flex flex-col md:flex-row gap-2 mb-12 border border-slate-100">
+            <input id="city" type="text" placeholder="Enter Destination" class="flex-1 px-6 py-4 outline-none font-bold text-lg">
+            <select id="days" class="px-6 py-4 outline-none font-bold text-slate-500 border-x">
+                <option value="3">3 Days</option>
+                <option value="5">5 Days</option>
+                <option value="7">7 Days</option>
+            </select>
+            <button id="planBtn" onclick="planTrip()" class="bg-blue-600 text-white px-10 py-4 rounded-[25px] font-black hover:bg-blue-700 transition">PLAN TRIP</button>
         </div>
 
-        <div id="loader" class="hidden mt-20 flex flex-col items-center">
-            <div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p class="text-blue-600 font-bold text-xs uppercase tracking-widest">Designing your experience...</p>
+        <div id="loader" class="hidden flex flex-col items-center py-10">
+            <div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
         </div>
 
-        <div id="output" class="hidden mt-20 text-left bg-white p-8 md:p-16 rounded-[50px] shadow-2xl border border-slate-100 results-area">
-        </div>
-
-        <section id="about" class="mt-40 text-left border-t border-slate-200 pt-24 grid md:grid-cols-2 gap-16">
-            <div>
-                <h2 class="text-3xl font-black mb-6">Redefining Modern Travel</h2>
-                <p class="text-slate-500 leading-relaxed font-medium">GlobeGuide AI is a professional platform built for the next generation of travelers. Using advanced AI architecture, we provide data-driven insights that blend cultural discovery with logistical efficiency.</p>
+        <div id="output" class="hidden text-left bg-white p-8 md:p-12 rounded-[40px] shadow-2xl mt-10">
             </div>
-            <div class="space-y-8">
-                <div class="flex gap-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 shrink-0 font-bold italic text-xl">1</div>
-                    <p class="text-sm text-slate-500"><span class="block font-bold text-slate-900 mb-1 italic">Hyper-Personalized</span> Every itinerary is unique to your trip.</p>
-                </div>
-                <div class="flex gap-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 shrink-0 font-bold italic text-xl">2</div>
-                    <p class="text-sm text-slate-500"><span class="block font-bold text-slate-900 mb-1 italic">Visual Experience</span> AI-curated images of every major landmark.</p>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer class="bg-white border-t border-slate-100 py-20 px-6 text-center">
-        <p class="text-slate-400 text-xs font-medium">© 2026 GlobeGuide AI Platform. Powered by Focushive Professional Services.</p>
-    </footer>
-
     <script>
-        async function planMyTrip() {
-            const cityInput = document.getElementById('city').value;
-            const daysInput = document.getElementById('days').value;
+        async function planTrip() {
+            const city = document.getElementById('city').value;
+            const days = document.getElementById('days').value;
             const output = document.getElementById('output');
             const loader = document.getElementById('loader');
-            const planBtn = document.getElementById('planBtn');
+            const btn = document.getElementById('planBtn');
 
-            if(!cityInput) { alert("Please enter a destination city."); return; }
+            if(!city) return alert("Please enter a city");
 
-            // Loading state
             loader.classList.remove('hidden');
             output.classList.add('hidden');
-            planBtn.disabled = true;
-            planBtn.innerText = "PLANNING...";
+            btn.disabled = true;
 
             try {
                 const response = await fetch('/api/generate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ city: cityInput, days: daysInput })
+                    body: JSON.stringify({ city, days })
                 });
-
                 const data = await response.json();
+
+                // Build Final Content with Map and Dynamic Images
+                const genericMap = `<iframe class="map-frame" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>`;
                 
-                // Injection of content
-                output.innerHTML = `
-                    <div id="pdf-area" class="p-2">
-                        <div class="flex justify-between items-center mb-12 pb-8 border-b border-slate-100">
-                            <div>
-                                <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tighter" style="border:none; margin:0; padding:0;">${cityInput}</h2>
-                                <p class="text-blue-600 font-bold text-xs mt-1 uppercase tracking-widest italic">Professional Itinerary</p>
-                            </div>
-                            <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl">DOWNLOAD PDF</button>
+                let htmlContent = `
+                    <div id="pdf-area">
+                        <div class="flex justify-between items-center mb-8 border-b pb-6">
+                            <h2 style="border:none; margin:0; padding:0;">${city.toUpperCase()}</h2>
+                            <button onclick="downloadPDF()" class="bg-black text-white text-[10px] font-bold px-5 py-2 rounded-full">SAVE PDF</button>
                         </div>
-                        <div class="prose prose-slate max-w-none">
+                        ${genericMap}
+                        <div class="prose">
                             ${data.content}
                         </div>
                     </div>
                 `;
 
-                loader.classList.add('hidden');
-                output.classList.remove('hidden');
+                output.innerHTML = htmlContent;
 
-            } catch (error) {
-                alert("The travel engine is busy. Please try again in a few seconds.");
-                console.error(error);
+                // التعديل السحري للصور: كنقلبوا على العناوين ونزيدوا تحتهم تصويرة
+                const headings = output.querySelectorAll('h2');
+                headings.forEach((h, index) => {
+                    if(index > 0) { // كنزيدو صورة لكل يوم من غير العنوان الرئيسي
+                        const img = document.createElement('img');
+                        img.src = `https://loremflickr.com/800/450/${encodeURIComponent(city)},travel/all?lock=${index}`;
+                        img.className = 'itinerary-img';
+                        img.alt = city;
+                        h.after(img);
+                    }
+                });
+
+                output.classList.remove('hidden');
+            } catch (e) {
+                alert("Error. Please try again.");
             } finally {
                 loader.classList.add('hidden');
-                planBtn.disabled = false;
-                planBtn.innerText = "PLAN TRIP";
+                btn.disabled = false;
             }
         }
 
@@ -220,16 +110,11 @@
             const element = document.getElementById('pdf-area');
             const cityName = document.getElementById('city').value;
             const opt = {
-                margin: [0.5, 0.5],
+                margin: 0.5,
                 filename: `GlobeGuide-${cityName}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { 
-                    scale: 2, 
-                    useCORS: true,
-                    letterRendering: true
-                },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             html2pdf().set(opt).from(element).save();
         }
