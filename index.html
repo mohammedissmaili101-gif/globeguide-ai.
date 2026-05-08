@@ -97,24 +97,22 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
-        // ✅ 1. نظام النشر التلقائي المطور (Fix للهواء/Cache)
+        // ✅ 1. نظام النشر التلقائي المطور (تم إصلاح جلب البيانات)
         async function fetchArticles() {
             const username = 'mohammedissmaili101-gif'; 
             const repo = 'globeguide-ai'; 
             const container = document.getElementById('dynamic-articles');
 
             try {
-                // إضافة timestamp لضمان جلب آخر نسخة من GitHub دون كاش
+                // استخدام timestamp لمنع المتصفح من عرض نسخة قديمة (Cache)
                 const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/?t=${new Date().getTime()}`);
                 const files = await response.json();
                 
-                // البحث عن الملفات التي تنتهي بـ -guide.html
                 const articles = files.filter(f => f.name.toLowerCase().endsWith('-guide.html'));
                 
                 if(articles.length > 0) {
                     container.innerHTML = '';
                     articles.forEach(file => {
-                        // تنظيف اسم المدينة من الشرطات وتحويله لعنوان
                         const cityName = file.name.replace('-guide.html', '').replace(/-/g, ' ').toUpperCase();
                         container.innerHTML += `
                             <div class="article-card p-10" onclick="window.location.href='${file.name}'">
@@ -132,7 +130,7 @@
             }
         }
 
-        // ✅ 2. نظام التخطيط والخرائط
+        // ✅ 2. نظام التخطيط (تم تصحيح رابط الخريطة والـ Backticks)
         async function planMyTrip() {
             const city = document.getElementById('city').value;
             const days = document.getElementById('days').value;
@@ -151,6 +149,7 @@
                 });
                 const data = await response.json();
 
+                // تصحيح رابط الخريطة لاستخدام قالب النصوص الصحيح
                 const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
 
                 output.innerHTML = `
@@ -186,7 +185,6 @@
             html2pdf().set(opt).from(element).save();
         }
 
-        // تشغيل نظام الجلب عند التحميل
         window.onload = fetchArticles;
     </script>
 </body>
