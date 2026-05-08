@@ -6,43 +6,59 @@ export default async function handler(req, res) {
 
     if (!apiKey) return res.status(200).json({ content: "Error: GROQ_API_KEY is missing." });
 
+    // الـ Prompt الجديد كيركز على الهيكلة البصرية (Visual Structure)
     const prompt = `
-        Create an ultra-luxury, high-end, and extremely detailed travel itinerary for ${city} for ${days} days.
+        Create a world-class, ultra-luxury travel itinerary for ${city} for ${days} days.
         
-        Mandatory Structure:
-        1. FOR EACH DAY:
-           - Use <h2>Day X: [Catchy & Professional Title]</h2>
-           - Start with a "Daily Vibe" paragraph (3-4 sentences) explaining the mood and what to expect.
-           - Use <h3> for each specific landmark or location.
-           - For each location, provide a DEEP explanation (History, why it's famous, and what makes it special).
-           - Add a "Pro Tip" for each location (e.g., best photo spot, local snack to try nearby).
-           - Use <ul> and <li> for the schedule of activities.
+        MANDATORY HTML STRUCTURE PER DAY:
+        1. Wrap EACH DAY in: <div style="margin-bottom: 40px; padding: 30px; background: #ffffff; border-radius: 32px; border: 1px solid #f1f5f9; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);">
+        2. Day Title: <h2 style="color: #1e3a8a; font-size: 2rem; font-weight: 800; border-left: 6px solid #2563eb; padding-left: 15px; margin-bottom: 20px;">Day X: [Title]</h2>
+        3. Daily Vibe: A sophisticated paragraph about the mood.
+        4. Locations: Use <h3>[Icon] Location Name</h3> with deep professional insights (4-5 sentences each).
+        5. Pro Tips: Wrap in <div style="background: #f8fafc; padding: 15px; border-radius: 15px; border-left: 4px solid #64748b; margin: 15px 0; font-style: italic; font-size: 0.9rem;">Pro Tip: [Insight]</div>
+        6. Activities: Use <ul> and <li> for the hourly schedule.
 
-        2. IMPORTANT:
-           - Output ONLY raw HTML. No <img> tags, no markdown, no backticks.
-           - Tone: Elite, sophisticated, and informative.
-           - Language: English.
+        CRITICAL: 
+        - Output ONLY the HTML content. 
+        - DO NOT use markdown, backticks (\`\`\`), or <html>/<body> tags.
+        - Language: English. Tone: Elite Concierge.
     `;
 
     try {
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
-            headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
+            headers: { 
+                "Authorization": `Bearer ${apiKey}`, 
+                "Content-Type": "application/json" 
+            },
             body: JSON.stringify({
-                model: "llama-3.1-8b-instant",
+                model: "llama-3.1-70b-versatile", // استعملت 70b هنا حيت أذكى فالتنظيم، إيلا بغيتي السرعة خلي 8b
                 messages: [
-                    { role: "system", content: "You are an elite travel concierge. You provide long, detailed, and clean HTML itineraries without images." },
+                    { 
+                        role: "system", 
+                        content: "You are a professional travel architect. You only output perfectly formatted HTML snippets. No chatter, no markdown." 
+                    },
                     { role: "user", content: prompt }
                 ],
-                temperature: 0.6,
+                temperature: 0.5, // هبطنا الحرارة شوية باش يبقى ملتزم بالتنظيم وما يبقاش يخربق
                 max_tokens: 4000
             })
         });
 
         const data = await response.json();
-        let content = data.choices[0].message.content.trim().replace(/```html|```/g, "");
+        
+        if (!data.choices || data.choices.length === 0) {
+            throw new Error("No response from AI");
+        }
+
+        let content = data.choices[0].message.content.trim();
+        
+        // تنظيف الكود من أي زوائد ممكنة
+        content = content.replace(/```html/g, "").replace(/```/g, "");
+
         res.status(200).json({ content: content });
     } catch (error) {
-        res.status(200).json({ content: "Connection failed. Please try again." });
+        console.error("API Error:", error);
+        res.status(200).json({ content: "<p style='color:red;'>System update in progress. Please refresh and try again in 10 seconds.</p>" });
     }
 }
