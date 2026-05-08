@@ -7,21 +7,20 @@ export default async function handler(req, res) {
     const apiKey = process.env.GROQ_API_KEY;
 
     if (!apiKey) {
-        return res.status(200).json({ content: "Error: GROQ_API_KEY is missing." });
+        return res.status(200).json({ content: "Error: GROQ_API_KEY is missing in Vercel settings." });
     }
 
-    // الـ Prompt المطور لجلب الصور والتنسيق
+    // الـ Prompt المطور لجلب الصور والتنسيق الاحترافي
     const prompt = `
-        Create a luxury, high-end travel itinerary for ${city} for ${days} days.
+        Create a luxury, high-fidelity travel itinerary for ${city} for ${days} days.
         
-        Strict Rules:
-        1. Use ONLY raw HTML tags. No markdown blocks.
-        2. Format: <h2> for Days, <h3> for Landmarks, <p> for descriptions, <ul>/<li> for lists.
-        3. For EACH DAY, include one relevant image using this exact HTML structure:
-           <img src="https://images.unsplash.com/photo-1?auto=format&fit=crop&w=800&q=80&${city},landmark" alt="Travel Image" style="width:100%; border-radius:20px; margin:20px 0; border: 1px solid #e2e8f0;">
+        Strict Formatting Rules:
+        1. Use ONLY raw HTML tags. No markdown code blocks.
+        2. Structure: <h2> for Day Titles, <h3> for Landmarks/Locations, <p> for descriptions, <ul> and <li> for activity lists.
+        3. For EVERY DAY, include one stunning image using this exact HTML:
+           <img src="https://images.unsplash.com/photo-1?auto=format&fit=crop&w=800&q=80&${city},landmark" alt="${city}" style="width:100%; border-radius:24px; margin:24px 0; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
         4. End with a "Pro Travel Tip" section.
-        5. Tone: Inspiring, professional, and upscale.
-        6. Language: English.
+        5. Language: English. Tone: Upscale and professional.
     `;
 
     try {
@@ -32,19 +31,19 @@ export default async function handler(req, res) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "llama3-8b-8192", // أسرع نموذج حالياً
+                model: "llama-3.1-8b-instant", // هادي هي النسخة الجديدة اللي خدامة دبا
                 messages: [
                     {
                         role: "system",
-                        content: "You are an expert travel concierge. You provide stunning, highly-structured HTML travel guides."
+                        content: "You are an expert travel concierge. You only output pure HTML without any introductory text or markdown wrappers."
                     },
                     {
                         role: "user",
                         content: prompt
                     }
                 ],
-                temperature: 0.6,
-                max_tokens: 2000
+                temperature: 0.5, // خفضنا الحرارة شوية باش يكون الجواب منظم كتر
+                max_tokens: 3000
             })
         });
 
@@ -54,15 +53,19 @@ export default async function handler(req, res) {
             return res.status(200).json({ content: `Groq Error: ${data.error.message}` });
         }
 
-        let content = data.choices[0].message.content.trim();
-        
-        // تنظيف أي زوائد برمجية
-        content = content.replace(/```html|```/g, "");
+        if (data.choices && data.choices[0].message) {
+            let content = data.choices[0].message.content.trim();
+            
+            // تنظيف أي كود زايد إيلا الموديل خربق شوية
+            content = content.replace(/```html|```/g, "");
 
-        res.status(200).json({ content: content });
+            res.status(200).json({ content: content });
+        } else {
+            res.status(200).json({ content: "AI failed to generate a response. Please try again." });
+        }
 
     } catch (error) {
         console.error("API Error:", error);
-        res.status(200).json({ content: "The AI engine is taking a break. Please try again in a moment." });
+        res.status(200).json({ content: "Server error. Please check your API key and connection." });
     }
 }
