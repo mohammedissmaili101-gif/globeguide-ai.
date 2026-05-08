@@ -6,6 +6,7 @@
     <title>GlobeGuide AI | Premium AI Travel Itinerary Planner</title>
     <meta name="description" content="Generate bespoke, high-fidelity travel itineraries with GlobeGuide AI. The world's smartest AI concierge for modern travelers.">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
@@ -45,7 +46,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Custom scrollbar for a premium feel */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
@@ -115,12 +115,12 @@
         </div>
 
         <div id="output" class="hidden mt-20 text-left bg-white p-8 md:p-16 rounded-[50px] shadow-2xl border border-slate-100 results-area">
-            </div>
+        </div>
 
         <section id="about" class="mt-40 text-left border-t border-slate-200 pt-24 grid md:grid-cols-2 gap-16">
             <div>
                 <h2 class="text-3xl font-black mb-6">Redefining Modern Travel</h2>
-                <p class="text-slate-500 leading-relaxed font-medium">GlobeGuide AI is a professional platform built for the next generation of travelers. Using Google's Gemini 1.5 Flash architecture, we provide data-driven insights that blend cultural discovery with logistical efficiency. No more spending hours on travel blogs—get a professional guide in seconds.</p>
+                <p class="text-slate-500 leading-relaxed font-medium">GlobeGuide AI is a professional platform built for the next generation of travelers. Using Google's Gemini 2.5 Flash architecture, we provide data-driven insights that blend cultural discovery with logistical efficiency. No more spending hours on travel blogs—get a professional guide in seconds.</p>
             </div>
             <div class="space-y-8">
                 <div class="flex gap-4">
@@ -136,11 +136,6 @@
     </main>
 
     <footer class="bg-white border-t border-slate-100 py-20 px-6 text-center">
-        <div class="flex flex-wrap justify-center gap-8 mb-10 text-[10px] font-black uppercase tracking-widest text-slate-400">
-            <a href="privacy.html" class="hover:text-blue-600">Privacy Policy</a>
-            <a href="terms.html" class="hover:text-blue-600">Terms of Service</a>
-            <a href="contact.html" class="hover:text-blue-600">Contact Us</a>
-        </div>
         <p class="text-slate-400 text-xs font-medium">© 2026 GlobeGuide AI Platform. Powered by Focushive Professional Services.</p>
     </footer>
 
@@ -169,16 +164,26 @@
                 const data = await response.json();
                 const cleanHtml = data.content.replace(/```html|```/g, "");
 
+                // رابط الخريطة
+                const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+
                 output.innerHTML = `
-                    <div class="flex justify-between items-center mb-12 pb-8 border-b border-slate-100">
-                        <div>
-                            <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tighter">${city}</h2>
-                            <p class="text-blue-600 font-bold text-xs mt-1 uppercase tracking-widest italic">Curated Adventure Guide</p>
+                    <div id="pdf-area">
+                        <div class="flex justify-between items-center mb-12 pb-8 border-b border-slate-100">
+                            <div>
+                                <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tighter">${city}</h2>
+                                <p class="text-blue-600 font-bold text-xs mt-1 uppercase tracking-widest italic">Curated Adventure Guide</p>
+                            </div>
+                            <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl">PDF GUIDE</button>
                         </div>
-                        <button onclick="window.print()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl">PDF GUIDE</button>
-                    </div>
-                    <div class="prose prose-slate max-w-none prose-h2:text-2xl prose-h2:font-black prose-h3:text-blue-600 prose-p:text-slate-600 font-medium">
-                        ${cleanHtml}
+
+                        <div class="mb-12 rounded-[30px] overflow-hidden border-4 border-slate-50 shadow-lg">
+                            <iframe width="100%" height="400" src="${mapUrl}" frameborder="0"></iframe>
+                        </div>
+
+                        <div class="prose prose-slate max-w-none prose-h2:text-2xl prose-h2:font-black prose-h3:text-blue-600 prose-p:text-slate-600 font-medium">
+                            ${cleanHtml}
+                        </div>
                     </div>
                 `;
 
@@ -189,6 +194,19 @@
                 alert("The AI Engine is currently busy. Please refresh and try again.");
                 loader.classList.add('hidden');
             }
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('pdf-area');
+            const cityName = document.getElementById('city').value;
+            const opt = {
+                margin: 0.5,
+                filename: `GlobeGuide-${cityName}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
         }
     </script>
 </body>
