@@ -3,37 +3,34 @@ export default async function handler(req, res) {
 
     const { city, days } = req.body;
     
-    // هاد السطر كيمسح أي فراغات يقدر يكونو دازو فـ Paste
-    const apiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : null;
+    // هاد السطر كيتأكد بلي الساروت ماشي غير كاين، ولكن راه خدام
+    const apiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : "";
 
-    if (!apiKey) {
-        return res.status(200).json({ content: "DEBUG: API Key is missing in Vercel Settings!" });
+    if (apiKey.length < 10) {
+        return res.status(200).json({ content: "خطأ تقني: Vercel مازال ما قراش الساروت. تأكد من تفعيل خانة Production ودير Redeploy." });
     }
 
     try {
-        // استعملنا الرابط الأكثر استقراراً حالياً
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        // جربنا v1 اللي هي أكثر استقراراً دابا
+        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        
+        const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                contents: [{ parts: [{ text: `Create a professional ${days}-day travel itinerary for ${city} in HTML format.` }] }]
+                contents: [{ parts: [{ text: `Write a short 3-line travel plan for ${city} in HTML.` }] }]
             })
         });
 
         const data = await response.json();
 
         if (data.error) {
-            // هاد السطر غايقول لينا الغلط فين كاين بالضبط
-            return res.status(200).json({ content: `Google API Error: ${data.error.message} (Status: ${data.error.status})` });
+            return res.status(200).json({ content: `Google Error: ${data.error.message}` });
         }
 
-        if (data.candidates && data.candidates[0].content) {
-            res.status(200).json({ content: data.candidates[0].content.parts[0].text });
-        } else {
-            res.status(200).json({ content: "AI returned no content. Try a different city." });
-        }
+        res.status(200).json({ content: data.candidates[0].content.parts[0].text });
 
     } catch (error) {
-        res.status(200).json({ content: "Connection Failed: Check your internet or API settings." });
+        res.status(200).json({ content: "Connection Failed. Please try again." });
     }
 }
