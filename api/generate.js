@@ -1,20 +1,36 @@
 export default async function handler(req, res) {
-    const apiKey = "AIzaSyCXmDz3vcPS-KBKlwPQ8nw1Q4b6xin_F6c"; 
+    if (req.method !== 'POST') return res.status(405).json({error: "Method Not Allowed"});
+    
+    const { city, days } = req.body;
+    
+    // هنا كنقراو الساروت من Vercel Settings ماشي من الكود
+    const apiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : null;
+
+    if (!apiKey) {
+        return res.status(200).json({ content: "Error: API Key is missing in Vercel Settings." });
+    }
 
     try {
-        // كنطلبوا من جوجل تعطينا كاع الموديلات اللي عندنا الحق نخدمو بيهم
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ 
+                contents: [{ 
+                    parts: [{ text: `Create a professional and detailed ${days}-day travel itinerary for ${city} in HTML format. Use beautiful headings, bullet points, and emojis.` }] 
+                }] 
+            })
+        });
+        
         const data = await response.json();
 
         if (data.error) {
-            return res.status(200).json({ content: "خطأ في الساروت: " + data.error.message });
+            return res.status(200).json({ content: `Google API Error: ${data.error.message}` });
         }
 
-        // غانخرجو سميات الموديلات المتاحة ليك
-        const models = data.models ? data.models.map(m => m.name).join(", ") : "لا توجد موديلات متاحة";
-        res.status(200).json({ content: "الموديلات المتاحة لحسابك هي: " + models });
-
-    } catch (e) {
-        res.status(200).json({ content: "فشل الاتصال بجوجل." });
+        res.status(200).json({ content: data.candidates[0].content.parts[0].text });
+    } catch (error) {
+        res.status(200).json({ content: "Connection Failed. Please check your settings." });
     }
 }
