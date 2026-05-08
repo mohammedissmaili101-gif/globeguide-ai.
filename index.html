@@ -14,66 +14,34 @@
     
     <style>
         :root { --primary: #2563eb; --bg: #f8fafc; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #0f172a; overflow-x: hidden; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #0f172a; scroll-behavior: smooth; }
         
-        .prose h2 {
-            font-size: 2.25rem !important;
-            font-weight: 800 !important;
-            color: #1e3a8a !important;
-            margin-top: 3.5rem !important;
-            margin-bottom: 1rem !important;
-            border-left: 6px solid #2563eb;
-            padding-left: 1.5rem;
-            line-height: 1.2;
-            text-transform: uppercase;
-        }
-        .prose h3 {
-            font-size: 1.6rem !important;
-            font-weight: 700 !important;
-            color: #2563eb !important;
-            margin-top: 2rem !important;
-            margin-bottom: 0.5rem !important;
-        }
-        .prose p {
-            font-size: 1.125rem !important;
-            line-height: 1.8 !important;
-            color: #475569 !important;
-            margin-bottom: 1.5rem !important;
-        }
-        .hero-mesh {
-            background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
-                              radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
-        }
-        .search-container {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.06);
-            border-radius: 40px;
-        }
-        .btn-premium {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4); }
+        .prose h2 { font-size: 2.25rem !important; font-weight: 800 !important; color: #1e3a8a !important; margin-top: 3.5rem !important; border-left: 6px solid #2563eb; padding-left: 1.5rem; text-transform: uppercase; }
+        .hero-mesh { background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%); }
+        .search-container { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 40px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.06); }
+        .section-card { background: white; border-radius: 40px; border: 1px solid #f1f5f9; transition: transform 0.3s ease; }
+        .blog-card:hover { transform: translateY(-10px); }
     </style>
 </head>
 
 <body class="hero-mesh min-h-screen">
-    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
+    <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center sticky top-0 z-50 bg-white/60 backdrop-blur-md border-b border-white/20">
         <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/20">
-                <span class="text-white font-black italic text-xl">G</span>
-            </div>
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg"><span class="text-white font-black italic text-xl">G</span></div>
             <span class="text-xl font-extrabold tracking-tighter">GlobeGuide<span class="text-blue-600">.ai</span></span>
         </div>
-        <a href="mailto:mohammedissmaili101@gmail.com" class="text-xs font-bold bg-white border border-slate-200 px-6 py-3 rounded-full hover:bg-slate-50 transition shadow-sm">Support</a>
+        <div class="hidden md:flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
+            <a href="#how-it-works" class="hover:text-blue-600">How it Works</a>
+            <a href="#blog" class="hover:text-blue-600">Travel Guides</a>
+            <a href="contact.html" class="hover:text-blue-600">Contact</a>
+        </div>
+        <a href="mailto:mohammedissmaili101@gmail.com" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full shadow-xl hover:bg-blue-600 transition">Support</a>
     </nav>
 
     <main class="max-w-5xl mx-auto px-6 pt-16 pb-24 text-center">
         <h1 class="text-5xl md:text-8xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">Stop Searching. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-serif italic">Start Exploring.</span></h1>
         
-        <div class="search-container p-3 max-w-4xl mx-auto flex flex-col md:flex-row gap-2">
+        <div class="search-container p-3 max-w-4xl mx-auto flex flex-col md:flex-row gap-2 mb-10">
             <div class="flex-1 flex items-center px-6">
                 <span class="text-xl mr-3">📍</span>
                 <input id="city" type="text" placeholder="Where do you want to go?" class="w-full bg-transparent py-4 outline-none font-bold text-slate-700">
@@ -81,17 +49,90 @@
             <select id="days" class="bg-transparent px-6 py-4 outline-none font-bold text-slate-500 border-x">
                 <option value="3">3 Days</option><option value="5">5 Days</option><option value="7">7 Days</option>
             </select>
-            <button id="planBtn" onclick="planMyTrip()" class="btn-premium text-white font-black px-12 py-5 rounded-[32px] text-sm uppercase tracking-widest">Plan Trip</button>
+            <button id="planBtn" onclick="planMyTrip()" class="bg-blue-600 text-white font-black px-12 py-5 rounded-[32px] text-sm uppercase tracking-widest hover:shadow-2xl transition-all">Plan Trip</button>
         </div>
 
-        <div id="loader" class="hidden mt-20 flex flex-col items-center">
+        <div id="loader" class="hidden flex flex-col items-center mb-10">
             <div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            <p class="text-blue-600 font-bold text-xs uppercase tracking-widest mt-4">Creating your master plan...</p>
+            <p class="text-blue-600 font-bold text-[10px] uppercase tracking-[0.2em] mt-4 italic">Designing your premium experience...</p>
         </div>
 
-        <div id="output" class="hidden mt-20 text-left bg-white p-8 md:p-16 rounded-[50px] shadow-2xl border border-slate-100">
+        <div id="output" class="hidden text-left section-card p-8 md:p-16 mb-24 shadow-2xl"></div>
+
+        <section id="how-it-works" class="py-20 text-left">
+            <h2 class="text-4xl font-black mb-12 italic tracking-tighter">Revolutionizing Travel Planning</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="section-card p-8 bg-blue-600 text-white">
+                    <span class="text-4xl mb-4 block">🧠</span>
+                    <h3 class="text-xl font-bold mb-2">AI Architecture</h3>
+                    <p class="opacity-80 text-sm leading-relaxed">We use the world's most advanced LLMs to analyze millions of travel data points to create your itinerary.</p>
+                </div>
+                <div class="section-card p-8">
+                    <span class="text-4xl mb-4 block">📍</span>
+                    <h3 class="text-xl font-bold mb-2">Precision Mapping</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Integrated Google Maps data ensures your logistics are optimized for travel time and distance.</p>
+                </div>
+                <div class="section-card p-8">
+                    <span class="text-4xl mb-4 block">📄</span>
+                    <h3 class="text-xl font-bold mb-2">Export Ready</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">One-click PDF generation allows you to carry your professional guide anywhere, offline.</p>
+                </div>
             </div>
+        </section>
+
+        <section id="blog" class="py-20 text-left">
+            <h2 class="text-4xl font-black mb-12 italic tracking-tighter">Popular Destinations</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="section-card overflow-hidden blog-card">
+                    <img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=800&q=80" alt="Marrakesh Guide" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest">Travel Insights</span>
+                        <h3 class="text-2xl font-black mt-2 mb-4">Ultimate 3-Day Luxury Guide to Marrakesh</h3>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">Discover the hidden riads, premium spas, and the best artisan shops in the heart of the Red City.</p>
+                        <a href="#" class="text-blue-600 font-bold text-xs uppercase tracking-tighter hover:underline">Read Full Article →</a>
+                    </div>
+                </div>
+                <div class="section-card overflow-hidden blog-card">
+                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80" alt="London Guide" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest">Global Escapes</span>
+                        <h3 class="text-2xl font-black mt-2 mb-4">A Professional Walkthrough of Modern London</h3>
+                        <p class="text-slate-500 text-sm mb-4 leading-relaxed">From the Shard to the hidden streets of Soho, experience London like a professional traveler.</p>
+                        <a href="#" class="text-blue-600 font-bold text-xs uppercase tracking-tighter hover:underline">Read Full Article →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="bg-white border-t border-slate-100 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 text-left mb-20">
+            <div class="col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg"><span class="text-white font-black italic text-sm">G</span></div>
+                    <span class="text-lg font-extrabold tracking-tighter">GlobeGuide<span class="text-blue-600">.ai</span></span>
+                </div>
+                <p class="text-slate-400 text-sm max-w-xs leading-relaxed italic">The next-generation AI travel concierge. Crafted by Focushive Professional Services for the modern global explorer.</p>
+            </div>
+            <div>
+                <h4 class="text-xs font-black uppercase tracking-widest mb-6">Legal</h4>
+                <ul class="space-y-4 text-xs font-bold text-slate-500">
+                    <li><a href="privacy.html" class="hover:text-blue-600">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="hover:text-blue-600">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs font-black uppercase tracking-widest mb-6">Support</h4>
+                <ul class="space-y-4 text-xs font-bold text-slate-500">
+                    <li><a href="contact.html" class="hover:text-blue-600">Contact Us</a></li>
+                    <li><a href="mailto:mohammedissmaili101@gmail.com" class="hover:text-blue-600">Direct Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center border-t border-slate-50 pt-10 px-6">
+            <p class="text-slate-300 text-[10px] font-bold uppercase tracking-[0.3em]">© 2026 GlobeGuide AI Platform | Focushive Professional</p>
+        </div>
+    </footer>
 
     <script>
         async function planMyTrip() {
@@ -101,7 +142,7 @@
             const loader = document.getElementById('loader');
             const btn = document.getElementById('planBtn');
 
-            if(!city) return alert("Please enter a city.");
+            if(!city) return alert("Please enter a destination city.");
             loader.classList.remove('hidden'); output.classList.add('hidden'); btn.disabled = true;
 
             try {
@@ -111,7 +152,6 @@
                     body: JSON.stringify({ city, days })
                 });
                 const data = await response.json();
-                
                 const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"></iframe>`;
 
                 output.innerHTML = `
@@ -119,32 +159,24 @@
                         <div class="flex justify-between items-center mb-12 pb-8 border-b border-slate-100">
                             <div>
                                 <h2 style="border:none; margin:0; font-size: 2.5rem; font-weight: 900;">${city.toUpperCase()}</h2>
-                                <p class="text-blue-600 font-bold text-xs uppercase tracking-widest mt-2">Personalized Master Itinerary</p>
+                                <p class="text-blue-600 font-bold text-xs uppercase tracking-[0.2em] mt-2 italic">Hyper-Detailed Master Itinerary</p>
                             </div>
-                            <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl">DOWNLOAD PDF</button>
+                            <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full shadow-xl">DOWNLOAD PDF</button>
                         </div>
                         ${genericMap}
-                        <div class="prose prose-slate max-w-none">
-                            ${data.content}
-                        </div>
+                        <div class="prose prose-slate max-w-none">${data.content}</div>
                     </div>
                 `;
-
                 output.classList.remove('hidden');
-            } catch (e) { alert("Error generating plan."); }
+                window.scrollTo({ top: output.offsetTop - 100, behavior: 'smooth' });
+            } catch (e) { alert("Engine busy. Refresh and try again."); }
             finally { loader.classList.add('hidden'); btn.disabled = false; }
         }
 
         function downloadPDF() {
             const element = document.getElementById('pdf-area');
             const cityName = document.getElementById('city').value;
-            const opt = {
-                margin: 0.5,
-                filename: `Guide-${cityName}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
+            const opt = { margin: 0.5, filename: `Guide-${cityName}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } };
             html2pdf().set(opt).from(element).save();
         }
     </script>
