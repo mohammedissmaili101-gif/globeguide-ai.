@@ -4,60 +4,44 @@ export default async function handler(req, res) {
     const { city, days } = req.body;
     const apiKey = process.env.GROQ_API_KEY;
 
-    if (!apiKey) {
-        return res.status(200).json({ content: "Error: GROQ_API_KEY is missing." });
-    }
+    if (!apiKey) return res.status(200).json({ content: "Error: GROQ_API_KEY is missing." });
 
-    // هاد الـ Prompt هو اللي كيفرض على الذكاء الاصطناعي يحترم الترتيب والصور والخريطة
     const prompt = `
-        Create a luxury, high-end travel itinerary for ${city} for ${days} days.
+        Create an ultra-luxury, high-end, and extremely detailed travel itinerary for ${city} for ${days} days.
         
         Mandatory Structure:
-        1. START with this Google Maps Embed (Replace ${city} with the actual city name):
-           <iframe width="100%" height="400" style="border-radius:24px; margin-bottom:30px; border:none;" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
-        
-        2. FOR EACH DAY:
-           - <h2>Day Title</h2>
-           - Include ONE unique image of a specific landmark mentioned:
-             <img src="https://loremflickr.com/800/450/${encodeURIComponent(city)},[LANDMARK]/all?random=[DAY]" alt="Landmark" style="width:100%; border-radius:24px; margin:20px 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
-           - Replace [LANDMARK] with the place name and [DAY] with the day number.
-           - Use <h3> for locations and <ul><li> for activities.
-        
-        3. RULES: Output ONLY raw HTML. No markdown, no backticks, no talk.
-        4. Tone: Upscale. Language: English.
+        1. FOR EACH DAY:
+           - Use <h2>Day X: [Catchy & Professional Title]</h2>
+           - Start with a "Daily Vibe" paragraph (3-4 sentences) explaining the mood and what to expect.
+           - Use <h3> for each specific landmark or location.
+           - For each location, provide a DEEP explanation (History, why it's famous, and what makes it special).
+           - Add a "Pro Tip" for each location (e.g., best photo spot, local snack to try nearby).
+           - Use <ul> and <li> for the schedule of activities.
+
+        2. IMPORTANT:
+           - Output ONLY raw HTML. No <img> tags, no markdown, no backticks.
+           - Tone: Elite, sophisticated, and informative.
+           - Language: English.
     `;
 
     try {
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
-            headers: {
-                "Authorization": `Bearer ${apiKey}`,
-                "Content-Type": "application/json"
-            },
+            headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
             body: JSON.stringify({
                 model: "llama-3.1-8b-instant",
                 messages: [
-                    { role: "system", content: "You are a professional travel concierge. Output ONLY pure HTML code without any markdown or explanations." },
+                    { role: "system", content: "You are an elite travel concierge. You provide long, detailed, and clean HTML itineraries without images." },
                     { role: "user", content: prompt }
                 ],
-                temperature: 0.5,
-                max_tokens: 3500
+                temperature: 0.6,
+                max_tokens: 4000
             })
         });
 
         const data = await response.json();
-        
-        if (!data.choices || data.choices.length === 0) {
-            return res.status(200).json({ content: "Error: No response from AI engine." });
-        }
-
-        let content = data.choices[0].message.content.trim();
-        
-        // تنظيف الكود من أي Markdown إيلا زادو الـ AI غلطاً
-        content = content.replace(/```html|```/g, "").trim();
-
+        let content = data.choices[0].message.content.trim().replace(/```html|```/g, "");
         res.status(200).json({ content: content });
-
     } catch (error) {
         res.status(200).json({ content: "Connection failed. Please try again." });
     }
