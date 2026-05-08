@@ -4,21 +4,24 @@ export default async function handler(req, res) {
     const { city, days } = req.body;
     const apiKey = process.env.GEMINI_API_KEY;
 
-    // هاد السطر غايخلينا نعرفو واش الساروت واصل للسيرفر
     if (!apiKey) {
         return res.status(200).json({ content: "Error: API Key is missing on Vercel side." });
     }
 
     try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        // التعديل هنا: استعملنا v1 ديريكت و موديل gemini-1.5-flash
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ contents: [{ parts: [{ text: `Create a trip to ${city} for ${days} days.` }] }] })
+            body: JSON.stringify({ 
+                contents: [{ 
+                    parts: [{ text: `Create a professional ${days}-day travel itinerary for ${city} in HTML format. Use beautiful icons and clear headings.` }] 
+                }] 
+            })
         });
         
         const data = await response.json();
 
-        // إيلا كان مشكل فـ الساروت من عند جوجل
         if (data.error) {
             return res.status(200).json({ content: `Google API Error: ${data.error.message}` });
         }
