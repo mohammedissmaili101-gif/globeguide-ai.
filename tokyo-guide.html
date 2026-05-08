@@ -12,7 +12,7 @@
         .hero-image { width: 100%; height: 70vh; object-fit: cover; border-radius: 0 0 80px 80px; background-color: #f1f5f9; }
         .gradient-text { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .content-card { border-radius: 40px; border: 1px solid #f1f5f9; padding: 40px; background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.02); }
-        h2 { font-size: 2.5rem !important; font-weight: 800 !important; letter-spacing: -0.05em; margin-top: 4rem !important; margin-bottom: 1.5rem !important; color: #0f172a; }
+        h2 { font-size: 2.5rem !important; font-weight: 800 !important; tracking: -0.05em; margin-top: 4rem !important; margin-bottom: 1.5rem !important; color: #0f172a; }
         h3 { font-size: 1.8rem !important; font-weight: 700 !important; color: #2563eb; margin-top: 2rem !important; }
         ul { margin-bottom: 2rem; }
         li { margin-bottom: 1rem; padding-left: 1.5rem; position: relative; }
@@ -22,7 +22,11 @@
 <body>
 
     <header class="relative">
-        <img src="https://images.unsplash.com/photo-1540959733332-e94e270b4d82?auto=format&fit=crop&w=1600&q=80" alt="Tokyo Neo-Luxury 2026" class="hero-image shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1540959733332-e94e270b4d82?q=80&w=1600&auto=format&fit=crop" 
+             alt="Tokyo Neo-Luxury 2026" 
+             class="hero-image shadow-2xl"
+             onerror="this.src='https://images.pexels.com/photos/2506923/pexels-photo-2506923.jpeg?auto=compress&cs=tinysrgb&w=1600'">
+        
         <div class="max-w-4xl mx-auto px-6 -mt-32 relative z-10">
             <div class="bg-white p-12 rounded-[50px] shadow-2xl border border-slate-100">
                 <span class="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-4 block">Premium Intelligence Report</span>
@@ -36,54 +40,51 @@
         
         <section class="prose prose-slate max-w-none">
             <h2>The Age of Silent Efficiency</h2>
-            <p>Tokyo in 2026 has successfully merged its high-density urbanism with <strong>Neo-Zen philosophies</strong>. The city is now a global leader in AI-driven tranquility, offering elite travelers a seamless experience where technology serves human calm through algorithmic precision.</p>
+            <p>Tokyo in 2026 has successfully merged its high-density urbanism with <strong>Neo-Zen philosophies</strong>. The city is now a leader in AI-driven tranquility, offering elite travelers a seamless experience where technology serves human calm, not chaos.</p>
 
             <h3>Exclusive Sanctuaries: The New Coordinates</h3>
-            <p>While the classic districts remain iconic, 2026 points to the "Azabudai Heights" and "Digital Yanaka" as the premier elite zones for the modern nomad:</p>
+            <p>While Ginza remains timeless, 2026 points to the "Azabudai Heights" and "Digital Yanaka" as the premier elite zones:</p>
             <ul>
-                <li><strong>Biometric Onsens:</strong> Private thermal springs that adjust mineral content based on your real-time Focushive health data.</li>
-                <li><strong>Subterranean Omakase:</strong> Invite-only dining vaults located beneath the city’s greenest carbon-negative skyscrapers.</li>
-                <li><strong>Sky-Forest Lounges:</strong> Rooftop ecosystems in Shinjuku designed for high-focus deep work and neural meditation.</li>
+                <li><strong>Biometric Onsens:</strong> Private thermal springs that adjust mineral content based on your real-time health data.</li>
+                <li><strong>Subterranean Omakase:</strong> Invite-only dining vaults located beneath the city’s greenest skyscrapers.</li>
+                <li><strong>Sky-Forest Lounges:</strong> Rooftop ecosystems in Shinjuku designed for high-focus deep work.</li>
             </ul>
 
             <div class="content-card my-16 bg-slate-50">
                 <h4 class="text-blue-600 font-black uppercase text-xs tracking-widest mb-4">Elite Intelligence Tip</h4>
-                <p class="text-slate-700 italic font-bold text-sm">"In 2026, the 'Imperial GreenPass' is required for accessing the newly restored private gardens of Chiyoda, which now feature silent AI-ambient soundscapes for absolute psychological immersion."</p>
+                <p class="text-slate-700 italic font-bold text-sm">"In 2026, the 'Imperial GreenPass' is required for accessing the newly restored private gardens of Chiyoda, which now feature silent AI-ambient soundscapes."</p>
             </div>
 
-            <h2>2026 High-Performance Itinerary</h2>
+            <h2>2026 Intelligence Itinerary</h2>
             
             <h3>Morning: Cognitive Immersion</h3>
-            <p>Begin at the <strong>TeamLab Borderless 2026</strong>. The new sensory-locked rooms provide a total cognitive reset using light frequencies and neural-sync technology. Follow this with a quiet walk through the Roppongi Art Triangle.</p>
+            <p>Begin at the <strong>TeamLab Borderless 2026</strong>. The new sensory-locked rooms provide a cognitive reset using light frequencies and neural-sync technology. Follow this with a quiet walk through the Roppongi Art Triangle.</p>
 
-            <h3>Afternoon: Algorithmic Mobility</h3>
-            <p>Experience the <strong>Shinkansen Executive Pods</strong>. These autonomous, whisper-quiet cabins now connect Central Tokyo to the luxury villas of Hakone in under 20 minutes, functioning as mobile, high-security executive suites for the elite.</p>
-
-            <h3>Evening: Molecular Heritage</h3>
-            <p>Dinner in 2026 is a fusion of deep heritage and molecular science. We recommend the <strong>'Vertical Farms' of Nihonbashi</strong>, where you harvest your own Michelin-star ingredients via robotic assistants before they are prepared by master chefs.</p>
+            <h3>Afternoon: Algorithmic Precision</h3>
+            <p>Experience the <strong>Shinkansen Executive Pods</strong>. These autonomous, whisper-quiet cabins now connect Tokyo to the luxury villas of Hakone in under 20 minutes.</p>
 
             <div class="grid md:grid-cols-2 gap-8 my-16">
                 <div class="p-8 rounded-[35px] border border-blue-100 bg-blue-50/30">
                     <h4 class="font-black text-blue-900 text-sm uppercase mb-4">Best for Tech</h4>
-                    <p class="text-xs text-blue-800 leading-relaxed">The Akihabara Quantum-Hub offers the world's most advanced holographic creative suites and 7G testing zones.</p>
+                    <p class="text-xs text-blue-800 leading-relaxed">The Akihabara Quantum-Hub offers the world's most advanced holographic creative suites.</p>
                 </div>
                 <div class="p-8 rounded-[35px] border border-purple-100 bg-purple-50/30">
                     <h4 class="font-black text-purple-900 text-sm uppercase mb-4">Best for Calm</h4>
-                    <p class="text-xs text-purple-800 leading-relaxed">The Meiji Jingu 'Silent Zone' is now 100% signal-blocked for deep spiritual immersion and digital detox.</p>
+                    <p class="text-xs text-purple-800 leading-relaxed">The Meiji Jingu 'Silent Zone' is now 100% signal-blocked for deep spiritual immersion.</p>
                 </div>
             </div>
 
             <h2>Practical Intelligence</h2>
             <ul>
-                <li><strong>Transport:</strong> The autonomous 'Aero-Taxi' network is the fastest way to traverse the skyline. For street level, your biometric ring is the only payment tool required.</li>
-                <li><strong>Digital Identity:</strong> Tokyo now utilizes blockchain-verified visitor IDs for instant, contact-free entry to all premium "Smart Lounges."</li>
-                <li><strong>Connectivity:</strong> Hyper-local 6G mesh networks ensure 100% uptime for your AI-assistants throughout the metropolitan area.</li>
+                <li><strong>Transport:</strong> The autonomous 'Aero-Taxi' network is the fastest way to traverse the skyline. For street level, your biometric ring is the only tool you need.</li>
+                <li><strong>Digital Identity:</strong> Tokyo now utilizes blockchain-verified visitor IDs for instant, contact-free entry.</li>
+                <li><strong>Connectivity:</strong> Hyper-local 6G mesh networks ensure 100% uptime for your AI-assistants.</li>
             </ul>
         </section>
 
         <section class="mt-32 p-12 rounded-[50px] bg-slate-900 text-white text-center shadow-3xl">
             <h2 class="text-white mt-0 mb-6">Ready for Tokyo?</h2>
-            <p class="text-slate-400 mb-10">Sync your Focushive biometric profile to unlock the full potential of Tokyo’s 2026 smart-infrastructure and private data-vaults.</p>
+            <p class="text-slate-400 mb-10">Sync your Focushive biometric profile to unlock the full potential of Tokyo’s 2026 smart-infrastructure.</p>
             <button onclick="window.print()" class="bg-blue-600 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-blue-700 transition-all">Download PDF Report</button>
         </section>
 
