@@ -10,11 +10,11 @@ const articlesData = [
     "slug": "tokyo-guide.html",
     "city": "TOKYO",
     "desc": "Neo-Zen Intelligence: Mastering the 2026 blueprint of Tokyo’s private sanctuaries and hyper-efficient luxury."
-  }
-];
+  },
   {
     "id": 3,
     "slug": "london-guide.html",
     "city": "LONDON",
     "desc": "Sovereign Intelligence: Mastering the 2026 blueprint of London’s secret vaults and hyper-connected luxury sanctuaries."
   }
+];
