@@ -16,7 +16,6 @@
         :root { --primary: #2563eb; --bg: #f8fafc; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #0f172a; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* تنسيق الأجوبة الذكية */
         .prose h2 { font-size: 2.25rem !important; font-weight: 800 !important; color: #1e3a8a !important; margin-top: 3.5rem !important; margin-bottom: 1rem !important; border-left: 6px solid #2563eb; padding-left: 1.5rem; line-height: 1.2; text-transform: uppercase; }
         .prose h3 { font-size: 1.6rem !important; font-weight: 700 !important; color: #2563eb !important; margin-top: 2rem !important; margin-bottom: 0.5rem !important; }
         .prose p { font-size: 1.125rem !important; line-height: 1.8 !important; color: #475569 !important; margin-bottom: 1.5rem !important; }
@@ -24,11 +23,10 @@
         .hero-mesh { background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%); }
         .search-container { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.06); border-radius: 40px; }
         
-        .article-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: white; border-radius: 35px; border: 1px solid #f1f5f9; }
-        .article-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.08); }
+        .article-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: white; border-radius: 35px; border: 1px solid #f1f5f9; cursor: pointer; }
+        .article-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.08); border-color: #2563eb; }
         
-        /* ستايل لزر اللغات */
-        #google_translate_element select { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 6px 12px; font-weight: 700; font-size: 12px; outline: none; cursor: pointer; }
+        #google_translate_element select { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 6px 12px; font-weight: 700; font-size: 12px; outline: none; }
     </style>
 </head>
 
@@ -75,7 +73,7 @@
             </div>
             
             <div id="dynamic-articles" class="grid md:grid-cols-2 gap-10">
-                <p class="text-slate-400 font-bold italic">Authenticating with GitHub Repository...</p>
+                <p class="text-slate-400 font-bold italic">Authenticating with Satellite Feed...</p>
             </div>
         </section>
     </main>
@@ -99,34 +97,42 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
-        // 1. نظام النشر التلقائي (الربط مع مستودعك)
+        // ✅ 1. نظام النشر التلقائي المطور (Fix للهواء/Cache)
         async function fetchArticles() {
             const username = 'mohammedissmaili101-gif'; 
             const repo = 'globeguide-ai'; 
             const container = document.getElementById('dynamic-articles');
 
             try {
-                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/`);
+                // إضافة timestamp لضمان جلب آخر نسخة من GitHub دون كاش
+                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/?t=${new Date().getTime()}`);
                 const files = await response.json();
-                const articles = files.filter(f => f.name.endsWith('-guide.html'));
+                
+                // البحث عن الملفات التي تنتهي بـ -guide.html
+                const articles = files.filter(f => f.name.toLowerCase().endsWith('-guide.html'));
                 
                 if(articles.length > 0) {
                     container.innerHTML = '';
                     articles.forEach(file => {
-                        const cityName = file.name.replace('-guide.html', '').toUpperCase().replace('-', ' ');
+                        // تنظيف اسم المدينة من الشرطات وتحويله لعنوان
+                        const cityName = file.name.replace('-guide.html', '').replace(/-/g, ' ').toUpperCase();
                         container.innerHTML += `
-                            <div class="article-card p-10">
+                            <div class="article-card p-10" onclick="window.location.href='${file.name}'">
                                 <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-4 block">Premium Report</span>
                                 <h3 class="text-3xl font-black mb-6 leading-tight text-slate-900">${cityName}</h3>
-                                <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium italic text-balance">AI-curated travel intelligence and cultural patterns for the modern luxury nomad.</p>
-                                <a href="${file.name}" class="inline-block bg-slate-900 text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all">Unlock Intelligence</a>
+                                <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium italic text-balance">AI-curated travel intelligence and cultural patterns for 2026.</p>
+                                <div class="inline-block bg-slate-900 text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all">Unlock Intelligence</div>
                             </div>`;
                     });
+                } else {
+                    container.innerHTML = '<p class="text-slate-400 font-bold italic">Waiting for new intelligence reports...</p>';
                 }
-            } catch (e) { container.innerHTML = '<p class="text-slate-300">Offline Intelligence Feed.</p>'; }
+            } catch (e) { 
+                container.innerHTML = '<p class="text-slate-300">Satellite link offline. Check GitHub permissions.</p>'; 
+            }
         }
 
-        // 2. نظام التخطيط (مع الخرائط والـ PDF)
+        // ✅ 2. نظام التخطيط والخرائط
         async function planMyTrip() {
             const city = document.getElementById('city').value;
             const days = document.getElementById('days').value;
@@ -144,11 +150,8 @@
                     body: JSON.stringify({ city, days })
                 });
                 const data = await response.json();
-                
-                // ✅ دمج الخريطة التفاعلية تلقائياً
-                const mapUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(city)}`;
-                // ملاحظة: إما تضع مفتاح Google Maps API أو نستخدم الـ Placeholder الحالي
-                const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=$${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
+
+                const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
 
                 output.innerHTML = `
                     <div id="pdf-area" class="p-2">
@@ -167,7 +170,7 @@
                 `;
                 output.classList.remove('hidden');
                 output.scrollIntoView({ behavior: 'smooth' });
-            } catch (e) { alert("Error."); }
+            } catch (e) { alert("Error generating intelligence."); }
             finally { loader.classList.add('hidden'); btn.disabled = false; }
         }
 
@@ -176,13 +179,14 @@
             const cityName = document.getElementById('city').value;
             const opt = {
                 margin: 0.5,
-                filename: `Guide-${cityName}.pdf`,
+                filename: `GlobeGuide-${cityName}.pdf`,
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             html2pdf().set(opt).from(element).save();
         }
 
+        // تشغيل نظام الجلب عند التحميل
         window.onload = fetchArticles;
     </script>
 </body>
