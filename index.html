@@ -3,161 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlobeGuide AI | Global Luxury Travel Planner</title>
+    <title>GlobeGuide AI | Premium AI Travel Planner</title>
     
     <meta name="google-site-verification" content="pek_oHFsRrtgR_Y6ti-HMARB3N1V5Zg0nqj-YD_eIKc" />
     <meta name="google-site-verification" content="XgriFXyJ2kBxp_XLdOugWo2Q3ifdF8wil6UqHaD877E" />
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; scroll-behavior: smooth; }
-        .hero-mesh { background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%); }
+        :root { --primary: #2563eb; --bg: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #0f172a; scroll-behavior: smooth; }
         
-        /* تنظيم الإجابة */
-        .day-card { background: white; padding: 30px; border-radius: 32px; border: 1px solid #f1f5f9; margin-bottom: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
-        .day-title { font-size: 1.8rem; font-weight: 800; color: #1e3a8a; border-left: 6px solid #2563eb; padding-left: 15px; margin-bottom: 20px; }
-        .tip-box { background: #f1f5f9; padding: 15px; border-radius: 12px; font-style: italic; font-size: 0.9rem; border-left: 4px solid #2563eb; margin: 15px 0; }
+        /* ✅ تنظيم الإجابة (The Result Styling) */
+        .day-card { background: white; padding: 35px; border-radius: 35px; border: 1px solid #f1f5f9; margin-bottom: 35px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05); }
+        .day-title { font-size: 2rem; font-weight: 800; color: #1e3a8a; border-left: 6px solid #2563eb; padding-left: 20px; margin-bottom: 20px; text-transform: uppercase; }
+        .vibe { font-style: italic; color: #64748b; margin-bottom: 20px; font-size: 1.1rem; }
+        .tip-box { background: #f8fafc; padding: 20px; border-radius: 20px; border-left: 4px solid #2563eb; margin: 20px 0; font-size: 0.95rem; color: #1e40af; font-weight: 600; }
         
-        /* Language Switcher */
-        #google_translate_element { margin-bottom: 10px; }
-        .goog-te-gadget-simple { border-radius: 20px !important; padding: 5px 10px !important; border: 1px solid #e2e8f0 !important; }
+        .hero-mesh { background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.06) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.06) 0px, transparent 50%); }
+        .search-container { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 40px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.06); }
+        
+        .article-card { transition: all 0.3s ease; border-radius: 30px; overflow: hidden; background: white; border: 1px solid #f1f5f9; }
+        .article-card:hover { transform: translateY(-10px); shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .article-content { display: none; padding: 20px; background: #f9fafb; border-radius: 0 0 30px 30px; }
+        .article-content.show { display: block; }
     </style>
 </head>
 
-<body class="hero-mesh">
-    <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b">
+<body class="hero-mesh min-h-screen">
+    <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center sticky top-0 z-50 bg-white/60 backdrop-blur-md">
         <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black italic">G</div>
-            <span class="font-extrabold tracking-tighter italic">GlobeGuide<span class="text-blue-600">.ai</span></span>
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg"><span class="text-white font-black italic text-xl">G</span></div>
+            <span class="text-xl font-extrabold tracking-tighter italic">GlobeGuide<span class="text-blue-600">.ai</span></span>
         </div>
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-6">
             <div id="google_translate_element"></div>
-            <a href="contact.html" class="text-[10px] font-black bg-slate-900 text-white px-4 py-2 rounded-full">SUPPORT</a>
+            <a href="contact.html" class="hidden md:block text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600">Contact</a>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 pt-16">
-        <div class="text-center mb-16">
-            <h1 class="text-5xl md:text-7xl font-black text-slate-900 mb-6 tracking-tighter">Travel with <span class="text-blue-600 italic">Intelligence.</span></h1>
-            <div class="bg-white p-3 rounded-[40px] shadow-2xl flex flex-col md:flex-row gap-2 max-w-3xl mx-auto border border-slate-100">
-                <input id="city" type="text" placeholder="Where to?" class="flex-1 px-6 py-3 outline-none font-bold">
-                <select id="days" class="px-4 py-3 outline-none font-bold border-x">
-                    <option value="3">3 Days</option><option value="5">5 Days</option><option value="7">7 Days</option>
-                </select>
-                <button onclick="planMyTrip()" id="planBtn" class="bg-blue-600 text-white font-black px-10 py-4 rounded-[30px] hover:bg-blue-700 transition-all uppercase text-xs">Generate</button>
+    <main class="max-w-5xl mx-auto px-6 pt-16 pb-24 text-center">
+        <h1 class="text-5xl md:text-7xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">Travel Intelligence <br><span class="text-blue-600 italic font-serif">Redefined.</span></h1>
+        
+        <div class="search-container p-3 max-w-4xl mx-auto flex flex-col md:flex-row gap-2 mb-20">
+            <div class="flex-1 flex items-center px-6">
+                <span class="text-xl mr-3">📍</span>
+                <input id="city" type="text" placeholder="Where is your next adventure?" class="w-full bg-transparent py-4 outline-none font-bold text-slate-700">
             </div>
+            <select id="days" class="bg-transparent px-6 py-4 outline-none font-bold text-slate-500 border-x">
+                <option value="3">3 Days</option><option value="5">5 Days</option><option value="7">7 Days</option>
+            </select>
+            <button onclick="planMyTrip()" id="planBtn" class="bg-blue-600 text-white font-black px-12 py-5 rounded-[32px] text-sm uppercase tracking-widest hover:bg-blue-700 transition-all">Plan Trip</button>
         </div>
 
-        <div id="loader" class="hidden flex flex-col items-center mb-10"><div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>
-        <div id="output" class="hidden mb-20"></div>
+        <div id="loader" class="hidden flex flex-col items-center mb-10">
+            <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <p class="text-blue-600 font-bold text-xs uppercase tracking-widest mt-4">Generating Premium Itinerary...</p>
+        </div>
 
-        <section id="blog" class="py-10">
-            <h2 class="text-3xl font-black mb-10 italic">Global Travel Intelligence</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">Paris: The Hidden Luxury Rooftops</h3>
-                        <p class="text-xs text-slate-500 mb-4">Discover 10 secret spots to see the Eiffel Tower without the crowds.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
+        <div id="output" class="hidden text-left mb-24"></div>
+
+        <section id="blog" class="py-10 text-left">
+            <h2 class="text-3xl font-black mb-12 italic border-b-4 border-blue-600 inline-block">Global Intelligence Reports</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800" class="h-64 w-full object-cover">
+                    <div class="p-8">
+                        <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest">Europe</span>
+                        <h3 class="text-2xl font-black mt-2 mb-4">Paris: The Art of Hidden Luxury</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Discover why the 7th Arrondissement remains the pinnacle of Parisian elegance. From private rooftop views to secret artisan bakeries, we explore the Paris that tourists never see.</p>
+                        <button onclick="toggleArt('art1')" class="text-xs font-black bg-slate-900 text-white px-6 py-3 rounded-full uppercase">Read Report</button>
+                    </div>
+                    <div id="art1" class="article-content text-slate-600 text-sm italic">
+                        Expert Advice: Visit the Rodin Museum gardens at 4 PM for the most dramatic lighting. Avoid the main boulevards for dining; instead, look for "Bistros" in the side streets of Le Marais.
                     </div>
                 </div>
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1540959733332-e946670b24b9?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">Tokyo for Digital Nomads</h3>
-                        <p class="text-xs text-slate-500 mb-4">The ultimate guide to work-friendly cafes and high-speed tech hubs in Japan.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
+
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1540959733332-e946670b24b9?w=800" class="h-64 w-full object-cover">
+                    <div class="p-8">
+                        <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest">Asia</span>
+                        <h3 class="text-2xl font-black mt-2 mb-4">Tokyo 2026: Technology & Zen</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">As Tokyo merges hyper-speed tech with ancient traditions, we guide you through the best spots for digital nomads and luxury travelers in the heart of Japan.</p>
+                        <button onclick="toggleArt('art2')" class="text-xs font-black bg-slate-900 text-white px-6 py-3 rounded-full uppercase">Read Report</button>
+                    </div>
+                    <div id="art2" class="article-content text-slate-600 text-sm italic">
+                        Digital Nomad Tip: Setagaya offers the quietest high-speed work cafes. Always carry a physical Suica card for seamless travel across different train lines.
                     </div>
                 </div>
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">Dubai 2026: The New Skyline</h3>
-                        <p class="text-xs text-slate-500 mb-4">A futuristic walkthrough of the world's most ambitious architecture projects.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
+
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800" class="h-64 w-full object-cover">
+                    <div class="p-8">
+                        <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest">Middle East</span>
+                        <h3 class="text-2xl font-black mt-2 mb-4">Dubai: Beyond the Skyscrapers</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Experience the cultural side of the UAE. Explore the Al Fahidi Historical Neighborhood and the sustainable luxury resorts rising from the golden dunes.</p>
+                        <button onclick="toggleArt('art3')" class="text-xs font-black bg-slate-900 text-white px-6 py-3 rounded-full uppercase">Read Report</button>
+                    </div>
+                    <div id="art3" class="article-content text-slate-600 text-sm italic">
+                        Luxury Tip: Book a private desert safari during the full moon for a celestial experience. The "Museum of the Future" requires tickets at least 2 weeks in advance.
                     </div>
                 </div>
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">Santorini: Beyond the Blue Domes</h3>
-                        <p class="text-xs text-slate-500 mb-4">Hidden villages and volcanic vineyards you must visit this year.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
+
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=800" class="h-64 w-full object-cover">
+                    <div class="p-8">
+                        <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest">Africa</span>
+                        <h3 class="text-2xl font-black mt-2 mb-4">Marrakech: An Artisan Journey</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Master the art of the Medina. We take you inside the most exclusive Riads and show you where the world's top designers source their inspiration.</p>
+                        <button onclick="toggleArt('art4')" class="text-xs font-black bg-slate-900 text-white px-6 py-3 rounded-full uppercase">Read Report</button>
                     </div>
-                </div>
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">The Soul of Marrakesh</h3>
-                        <p class="text-xs text-slate-500 mb-4">Craftsmanship and artisan riads in the heart of the Medina.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
-                    </div>
-                </div>
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">Sydney: Coastal Luxury Guide</h3>
-                        <p class="text-xs text-slate-500 mb-4">The best harbor-view dining and secret beaches in Australia.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
-                    </div>
-                </div>
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">London: Modern Classics</h3>
-                        <p class="text-xs text-slate-500 mb-4">Where royal tradition meets the cutting edge of Shoreditch.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
-                    </div>
-                </div>
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">Bali: Sustainable Zen</h3>
-                        <p class="text-xs text-slate-500 mb-4">Eco-resorts and jungle retreats for the conscious traveler.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
-                    </div>
-                </div>
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">Amsterdam: Canals & Design</h3>
-                        <p class="text-xs text-slate-500 mb-4">A tour of the world's most creative architecture and art museums.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
-                    </div>
-                </div>
-                <div class="bg-white rounded-3xl overflow-hidden border">
-                    <img src="https://images.unsplash.com/photo-1512100356956-c12872638f54?w=500" class="h-40 w-full object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold mb-2">Iceland: The Fire & Ice Trip</h3>
-                        <p class="text-xs text-slate-500 mb-4">Your complete guide to Northern Lights and geothermal lagoons.</p>
-                        <a href="#" class="text-blue-600 font-bold text-xs uppercase underline">Read More</a>
+                    <div id="art4" class="article-content text-slate-600 text-sm italic">
+                        Insider Tip: For authentic Moroccan leather, visit the tanneries early in the morning. Use a local guide from your Riad to navigate the deep souks safely.
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-slate-900 text-white py-16 px-6 mt-20">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-10">
-            <div>
-                <h4 class="text-xl font-bold mb-4">GlobeGuide.ai</h4>
-                <p class="text-slate-400 text-sm max-w-xs italic">Powered by Focushive Professional Services.</p>
-            </div>
-            <div class="flex gap-10 text-xs font-bold text-slate-400">
-                <a href="privacy.html">PRIVACY</a>
-                <a href="terms.html">TERMS</a>
-                <a href="contact.html">CONTACT</a>
-            </div>
+    <footer class="bg-slate-900 text-white py-12 px-6 text-center">
+        <p class="text-slate-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">© 2026 GlobeGuide AI | Focushive Professional</p>
+        <div class="flex justify-center gap-8 text-[10px] font-black uppercase text-slate-500">
+            <a href="privacy.html" class="hover:text-blue-500">Privacy</a>
+            <a href="terms.html" class="hover:text-blue-500">Terms</a>
+            <a href="contact.html" class="hover:text-blue-500">Contact Us</a>
         </div>
     </footer>
 
     <script type="text/javascript">
         function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+        function toggleArt(id) {
+            document.getElementById(id).classList.toggle('show');
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -170,7 +151,7 @@
             const loader = document.getElementById('loader');
             const btn = document.getElementById('planBtn');
 
-            if(!city) return alert("City required.");
+            if(!city) return alert("Please specify a destination.");
             loader.classList.remove('hidden'); output.classList.add('hidden'); btn.disabled = true;
 
             try {
@@ -180,26 +161,29 @@
                     body: JSON.stringify({ city, days })
                 });
                 const data = await response.json();
-                const map = `<iframe width="100%" height="400" style="border-radius:32px; margin-bottom:30px;" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=12&output=embed" frameborder="0"></iframe>`;
+                
+                const map = `<iframe width="100%" height="450" style="border-radius:35px; margin-bottom:40px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"></iframe>`;
 
                 output.innerHTML = `
                     <div id="pdf-area">
-                        <div class="flex justify-between items-center mb-8 pb-6 border-b">
-                            <h2 style="font-size:2.5rem; font-weight:900;">${city.toUpperCase()}</h2>
-                            <button onclick="downloadPDF()" class="bg-black text-white px-6 py-2 rounded-full text-[10px]">PDF</button>
+                        <div class="flex justify-between items-center mb-10 pb-6 border-b border-slate-100">
+                            <h2 style="font-size:3rem; font-weight:900; margin:0;">${city.toUpperCase()}</h2>
+                            <button onclick="downloadPDF()" class="bg-black text-white px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">Export PDF</button>
                         </div>
                         ${map}
-                        <div class="itinerary-style">${data.content}</div>
+                        <div class="itinerary-wrapper">${data.content}</div>
                     </div>
                 `;
                 output.classList.remove('hidden');
-            } catch (e) { alert("Server busy."); }
+                window.scrollTo({ top: output.offsetTop - 100, behavior: 'smooth' });
+            } catch (e) { alert("Generation failed. Please try again."); }
             finally { loader.classList.add('hidden'); btn.disabled = false; }
         }
 
         function downloadPDF() {
             const element = document.getElementById('pdf-area');
-            html2pdf().set({ margin: 0.5, filename: 'TravelPlan.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { format: 'letter', orientation: 'portrait' } }).from(element).save();
+            const cityName = document.getElementById('city').value;
+            html2pdf().set({ margin: 0.5, filename: `GlobeGuide-${cityName}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(element).save();
         }
     </script>
 </body>
