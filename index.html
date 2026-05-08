@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GlobeGuide AI | Premium AI Travel Itinerary Planner</title>
+    
+    <meta name="google-site-verification" content="pek_oHFsRrtgR_Y6ti-HMARB3N1V5Zg0nqj-YD_eIKc" />
+    
     <meta name="description" content="Generate bespoke, high-fidelity travel itineraries with GlobeGuide AI. The world's smartest AI concierge for modern travelers.">
+    <meta name="keywords" content="travel planner, AI itinerary, travel guide, GlobeGuide, Focushive">
+    <meta property="og:title" content="GlobeGuide AI | Premium Travel Planner">
+    <meta property="og:description" content="Personalized travel itineraries crafted in seconds.">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -63,7 +70,7 @@
         </div>
         <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
             <a href="#about" class="hover:text-blue-600 transition">How it works</a>
-            <a href="contact.html" class="hover:text-blue-600 transition">Support</a>
+            <a href="mailto:mohammedissmaili101@gmail.com" class="hover:text-blue-600 transition">Support</a>
         </div>
         <a href="mailto:mohammedissmaili101@gmail.com" class="text-xs font-bold bg-white border border-slate-200 px-6 py-3 rounded-full hover:bg-slate-50 transition shadow-sm">Contact</a>
     </nav>
@@ -103,10 +110,6 @@
             <button onclick="planMyTrip()" class="btn-premium text-white font-black px-12 py-5 rounded-[32px] shadow-xl text-sm uppercase tracking-widest">
                 Plan Trip
             </button>
-        </div>
-
-        <div class="mt-20 h-28 bg-slate-100/40 border-2 border-dashed border-slate-200 rounded-[40px] flex items-center justify-center text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">
-            Premium Travel Ad Space
         </div>
 
         <div id="loader" class="hidden mt-20 flex flex-col items-center">
@@ -164,7 +167,7 @@
                 const data = await response.json();
                 const cleanHtml = data.content.replace(/```html|```/g, "");
 
-                // رابط الخريطة
+                // Map link
                 const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
 
                 output.innerHTML = `
@@ -174,7 +177,7 @@
                                 <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tighter">${city}</h2>
                                 <p class="text-blue-600 font-bold text-xs mt-1 uppercase tracking-widest italic">Curated Adventure Guide</p>
                             </div>
-                            <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl">PDF GUIDE</button>
+                            <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl">DOWNLOAD PDF</button>
                         </div>
 
                         <div class="mb-12 rounded-[30px] overflow-hidden border-4 border-slate-50 shadow-lg">
