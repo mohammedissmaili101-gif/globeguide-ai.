@@ -4,19 +4,27 @@ export default async function handler(req, res) {
     const { city, days } = req.body;
     const apiKey = process.env.GROQ_API_KEY;
 
-    if (!apiKey) return res.status(200).json({ content: "Error: GROQ_API_KEY missing." });
+    if (!apiKey) {
+        return res.status(200).json({ content: "Error: GROQ_API_KEY is missing." });
+    }
 
+    // هاد الـ Prompt هو اللي كيفرض على الذكاء الاصطناعي يحترم الترتيب والصور والخريطة
     const prompt = `
         Create a luxury, high-end travel itinerary for ${city} for ${days} days.
         
-        Structure:
-        1. Start with a brief, inspiring introduction.
-        2. For EACH DAY, use <h2>Day X: Title</h2>.
-        3. Inside each day, use <h3>Landmark Name</h3> for the main attraction.
-        4. Use <p> for descriptions and <ul><li> for activities.
-        5. DO NOT include <img> tags or iframes in your response. I will add them via code.
-        6. Output ONLY raw HTML. No markdown, no backticks.
-        7. Tone: Upscale. Language: English.
+        Mandatory Structure:
+        1. START with this Google Maps Embed (Replace ${city} with the actual city name):
+           <iframe width="100%" height="400" style="border-radius:24px; margin-bottom:30px; border:none;" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+        
+        2. FOR EACH DAY:
+           - <h2>Day Title</h2>
+           - Include ONE unique image of a specific landmark mentioned:
+             <img src="https://loremflickr.com/800/450/${encodeURIComponent(city)},[LANDMARK]/all?random=[DAY]" alt="Landmark" style="width:100%; border-radius:24px; margin:20px 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
+           - Replace [LANDMARK] with the place name and [DAY] with the day number.
+           - Use <h3> for locations and <ul><li> for activities.
+        
+        3. RULES: Output ONLY raw HTML. No markdown, no backticks, no talk.
+        4. Tone: Upscale. Language: English.
     `;
 
     try {
@@ -29,18 +37,28 @@ export default async function handler(req, res) {
             body: JSON.stringify({
                 model: "llama-3.1-8b-instant",
                 messages: [
-                    { role: "system", content: "You are a professional travel concierge. Output ONLY clean HTML body content." },
+                    { role: "system", content: "You are a professional travel concierge. Output ONLY pure HTML code without any markdown or explanations." },
                     { role: "user", content: prompt }
                 ],
                 temperature: 0.5,
-                max_tokens: 3000
+                max_tokens: 3500
             })
         });
 
         const data = await response.json();
-        let content = data.choices[0].message.content.trim().replace(/```html|```/g, "");
+        
+        if (!data.choices || data.choices.length === 0) {
+            return res.status(200).json({ content: "Error: No response from AI engine." });
+        }
+
+        let content = data.choices[0].message.content.trim();
+        
+        // تنظيف الكود من أي Markdown إيلا زادو الـ AI غلطاً
+        content = content.replace(/```html|```/g, "").trim();
+
         res.status(200).json({ content: content });
+
     } catch (error) {
-        res.status(200).json({ content: "Server Error. Please try again." });
+        res.status(200).json({ content: "Connection failed. Please try again." });
     }
 }
