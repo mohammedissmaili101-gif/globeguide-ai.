@@ -18,3 +18,6 @@ const articlesData = [
     "desc": "Sovereign Intelligence: Mastering the 2026 blueprint of London’s secret vaults and hyper-connected luxury sanctuaries."
   }
 ];
+
+// هاد السطر كيتأكد بلي البيانات واجدة للاستعمال في الصفحة الرئيسية
+console.log("Database initialized: " + articlesData.length + " articles loaded.");
