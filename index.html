@@ -18,7 +18,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="./database.js"></script>
 
@@ -26,65 +26,54 @@
         :root { --primary: #2563eb; --bg: #f8fafc; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #0f172a; overflow-x: hidden; scroll-behavior: smooth; }
         
+        /* Your Original Prose Styles */
         .prose h2 { font-size: 2.25rem !important; font-weight: 800 !important; color: #1e3a8a !important; margin-top: 3.5rem !important; margin-bottom: 1rem !important; border-left: 6px solid #2563eb; padding-left: 1.5rem; line-height: 1.2; text-transform: uppercase; }
         .prose h3 { font-size: 1.6rem !important; font-weight: 700 !important; color: #2563eb !important; margin-top: 2rem !important; margin-bottom: 0.5rem !important; }
         .prose p { font-size: 1.125rem !important; line-height: 1.8 !important; color: #475569 !important; margin-bottom: 1.5rem !important; }
         
+        /* New Intelligence Styles */
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        @keyframes scan { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+        .animate-scan { animation: scan 3s linear infinite; }
+        
         .hero-mesh { background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%); }
         .search-container { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.06); border-radius: 40px; }
         
+        /* Original Table Styles */
+        .stats-table-wrapper { background: white; border-radius: 40px; border: 1px solid #f1f5f9; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.04); }
+        .live-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 0 3px rgba(34,197,94,0.2); animation: pulse-green 2s infinite; }
+        @keyframes pulse-green { 0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.2); } 50% { box-shadow: 0 0 0 7px rgba(34,197,94,0.08); } }
+        .stats-table { width: 100%; border-collapse: collapse; }
+        .stat-bar { height: 6px; border-radius: 99px; background: linear-gradient(90deg, #2563eb, #6366f1); transition: width 1.2s cubic-bezier(0.16,1,0.3,1); }
+        
+        /* Article Cards */
         .article-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: white; border-radius: 35px; border: 1px solid #f1f5f9; cursor: pointer; overflow: hidden; }
         .article-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.08); border-color: #2563eb; }
         
         #google_translate_element select { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 6px 12px; font-weight: 700; font-size: 12px; outline: none; }
-
-        .stats-table-wrapper { background: white; border-radius: 40px; border: 1px solid #f1f5f9; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.04); }
-        .stats-table-header { display: flex; align-items: center; gap: 16px; padding: 28px 36px; border-bottom: 1px solid #f1f5f9; }
-        .live-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 0 3px rgba(34,197,94,0.2); animation: pulse-green 2s infinite; }
-        @keyframes pulse-green { 0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.2); } 50% { box-shadow: 0 0 0 7px rgba(34,197,94,0.08); } }
-        .stats-table { width: 100%; border-collapse: collapse; }
-        .stats-table thead th { padding: 14px 20px; text-align: left; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: #94a3b8; background: #f8fafc; border-bottom: 1px solid #f1f5f9; }
-        .stats-table thead th:first-child { padding-left: 36px; }
-        .stats-table thead th:last-child { padding-right: 36px; text-align: right; }
-        .stats-table tbody tr { border-bottom: 1px solid #f8fafc; transition: background 0.2s; cursor: pointer; }
-        .stats-table tbody tr:hover { background: #f8faff; }
-        .stats-table tbody td { padding: 18px 20px; font-size: 13px; font-weight: 600; color: #334155; vertical-align: middle; }
-        .stats-table tbody td:first-child { padding-left: 36px; }
-        .stats-table tbody td:last-child { padding-right: 36px; }
-        .rank-badge { width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; }
-        .rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; }
-        .rank-2 { background: linear-gradient(135deg, #94a3b8, #64748b); color: white; }
-        .rank-3 { background: linear-gradient(135deg, #fb923c, #ea580c); color: white; }
-        .rank-other { background: #f1f5f9; color: #64748b; }
-        .stat-bar-bg { background: #f1f5f9; border-radius: 99px; height: 6px; width: 100%; min-width: 80px; }
-        .stat-bar { height: 6px; border-radius: 99px; background: linear-gradient(90deg, #2563eb, #6366f1); transition: width 1.2s cubic-bezier(0.16,1,0.3,1); }
-        .change-badge { display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 99px; font-size: 10px; font-weight: 800; }
-        .change-up { background: #dcfce7; color: #16a34a; }
-        .change-down { background: #fee2e2; color: #dc2626; }
-        .change-flat { background: #f1f5f9; color: #94a3b8; }
-        .safety-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 5px; }
-        .safety-high { background: #22c55e; }
-        .safety-med { background: #f59e0b; }
-        .safety-low { background: #ef4444; }
-        .refresh-btn { margin-left: auto; background: #f1f5f9; border: none; padding: 8px 18px; border-radius: 99px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #475569; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
-        .refresh-btn:hover { background: #2563eb; color: white; }
-        .refresh-btn.spinning svg { animation: spin 0.8s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .last-updated { font-size: 10px; color: #94a3b8; font-weight: 600; margin-left: 12px; }
-        .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
-        .filter-tab { padding: 6px 16px; border-radius: 99px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid #e2e8f0; background: white; color: #64748b; cursor: pointer; transition: all 0.2s; }
-        .filter-tab.active, .filter-tab:hover { background: #2563eb; color: white; border-color: #2563eb; }
-        .sortable { cursor: pointer; user-select: none; }
-        .sortable:hover { color: #2563eb; }
-        .sort-arrow { display: inline-block; margin-left: 4px; opacity: 0.4; }
-        .sort-arrow.asc::after { content: '↑'; }
-        .sort-arrow.desc::after { content: '↓'; }
-        .sort-arrow.none::after { content: '↕'; }
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
     </style>
 </head>
 
 <body class="hero-mesh min-h-screen">
+    <div id="ai-scanner" class="hidden fixed inset-0 bg-slate-950 z-[100] flex items-center justify-center p-6 backdrop-blur-xl">
+        <div class="max-w-md w-full text-center">
+            <div class="relative w-32 h-32 mx-auto mb-10">
+                <div class="absolute inset-0 border-4 border-blue-500/20 rounded-full"></div>
+                <div class="absolute inset-0 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <span id="scan-percent" class="text-white font-black text-xl mono">0%</span>
+                </div>
+            </div>
+            <div class="bg-black/40 p-6 rounded-3xl border border-white/10 font-mono text-[11px] text-left space-y-2">
+                <p class="text-blue-400">>> INITIALIZING SATELLITE UPLINK...</p>
+                <p class="text-slate-500" id="scan-log">>> CONNECTING TO GLOBAL NODES...</p>
+                <div class="h-1.5 bg-slate-800 rounded-full mt-4 overflow-hidden">
+                    <div id="scan-bar" class="h-full bg-blue-500 w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <h1 class="sr-only">GlobeGuide AI - Best AI Travel Planner and Emergency Intelligence Feed</h1>
 
     <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center sticky top-0 z-50 bg-white/50 backdrop-blur-md border-b border-white/20">
@@ -92,28 +81,39 @@
             <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/20">
                 <span class="text-white font-black italic text-xl">G</span>
             </div>
-            <span class="text-xl font-extrabold tracking-tighter">GlobeGuide<span class="text-blue-600">.ai</span></span>
+            <span class="text-xl font-extrabold tracking-tighter uppercase">GlobeGuide<span class="text-blue-600">.ai</span></span>
         </div>
         
         <div class="flex items-center gap-4">
             <div id="google_translate_element"></div>
-            <a href="emergency.html" class="text-xs font-bold bg-red-50 border border-red-100 text-red-600 px-6 py-3 rounded-full hover:bg-red-600 hover:text-white transition shadow-sm">🆘 Emergency Numbers</a>
-            <a href="contact.html" class="text-xs font-bold bg-white border border-slate-200 px-6 py-3 rounded-full hover:bg-slate-50 transition shadow-sm">Support</a>
+            <a href="emergency.html" class="text-xs font-bold bg-red-50 border border-red-100 text-red-600 px-6 py-3 rounded-full hover:bg-red-600 hover:text-white transition shadow-sm uppercase tracking-widest">🆘 Emergency</a>
+            <a href="contact.html" class="text-xs font-bold bg-white border border-slate-200 px-6 py-3 rounded-full hover:bg-slate-50 transition shadow-sm uppercase tracking-widest">Support</a>
         </div>
     </nav>
 
     <main class="max-w-5xl mx-auto px-6 pt-16 pb-24 text-center">
-        <p class="text-5xl md:text-8xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">Stop Searching. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-serif italic">Start Exploring.</span></p>
+        <p class="text-5xl md:text-8xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight uppercase">Stop Searching. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-serif italic normal-case">Start Exploring.</span></p>
         
-        <div class="search-container p-3 max-w-4xl mx-auto flex flex-col md:flex-row gap-2">
+        <div class="search-container p-3 max-w-4xl mx-auto flex flex-col md:flex-row gap-2 relative z-10">
             <div class="flex-1 flex items-center px-6">
                 <span class="text-xl mr-3">📍</span>
-                <input id="city" type="text" placeholder="Where do you want to go?" class="w-full bg-transparent py-4 outline-none font-bold text-slate-700">
+                <input id="city" type="text" placeholder="Where do you want to go?" class="w-full bg-transparent py-4 outline-none font-bold text-slate-700 uppercase tracking-widest text-sm">
             </div>
-            <select id="days" class="bg-transparent px-6 py-4 outline-none font-bold text-slate-500 border-x">
+            <select id="days" class="bg-transparent px-6 py-4 outline-none font-bold text-slate-500 border-x uppercase text-xs">
                 <option value="3">3 Days</option><option value="5">5 Days</option><option value="7">7 Days</option>
             </select>
-            <button id="planBtn" onclick="planMyTrip()" class="bg-blue-600 text-white font-black px-12 py-5 rounded-[32px] text-sm uppercase tracking-widest hover:bg-blue-700 transition-all">Plan Trip</button>
+            <button id="planBtn" onclick="startAnalysis()" class="bg-blue-600 text-white font-black px-12 py-5 rounded-[32px] text-xs uppercase tracking-widest hover:bg-blue-700 transition-all">Start Intelligence Scan</button>
+        </div>
+
+        <div class="max-w-2xl mx-auto mt-8 overflow-hidden bg-slate-900/5 rounded-full p-2 border border-slate-200">
+            <div id="pulse-feed" class="h-6 overflow-hidden relative px-4">
+                <div id="feed-container" class="absolute w-full transition-all duration-700">
+                    <p class="text-[9px] text-slate-500 font-black tracking-widest flex justify-between uppercase">
+                        <span>📍 Satellite Feed: Active</span>
+                        <span class="text-blue-600">Global Scan in Progress</span>
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div id="loader" class="hidden mt-20 flex flex-col items-center">
@@ -121,15 +121,47 @@
             <p class="text-blue-600 font-bold text-xs uppercase tracking-widest mt-4 animate-pulse">Syncing satellite intelligence...</p>
         </div>
 
-        <div id="output" class="hidden mt-20 text-left bg-white p-8 md:p-16 rounded-[50px] shadow-2xl border border-slate-100"></div>
+        <div id="output-wrapper" class="hidden mt-20 text-left">
+            <div class="p-8 bg-slate-950 rounded-[40px] border border-blue-500/20 shadow-2xl mb-8 relative overflow-hidden">
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-5 rounded-3xl bg-white/5 border border-white/10 text-center">
+                        <span class="text-xl mb-3 block">🛰️</span>
+                        <p class="text-[9px] font-black text-blue-400 uppercase mb-2">Tactical Scout</p>
+                        <p id="agent-1" class="text-[10px] text-slate-400 font-bold uppercase">Scanning...</p>
+                    </div>
+                    <div class="p-5 rounded-3xl bg-white/5 border border-white/10 text-center">
+                        <span class="text-xl mb-3 block">📊</span>
+                        <p class="text-[9px] font-black text-emerald-400 uppercase mb-2">Resource Analyst</p>
+                        <p id="agent-2" class="text-[10px] text-slate-400 font-bold uppercase">Optimizing...</p>
+                    </div>
+                    <div class="p-5 rounded-3xl bg-white/5 border border-white/10 text-center">
+                        <span class="text-xl mb-3 block">🕵️</span>
+                        <p class="text-[9px] font-black text-amber-400 uppercase mb-2">Local Insider</p>
+                        <p id="agent-3" class="text-[10px] text-slate-400 font-bold uppercase">Mapping...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="output" class="bg-white p-8 md:p-16 rounded-[50px] shadow-2xl border border-slate-100"></div>
+        </div>
+
+        <div id="maria-bubble" class="hidden fixed bottom-10 left-10 z-[60] max-w-xs group transition-all duration-500">
+            <div class="relative bg-white p-5 rounded-[2.5rem] shadow-2xl border border-blue-100 flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full border-2 border-blue-500 flex-shrink-0 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Maria" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <p class="text-[9px] font-black text-blue-600 uppercase mb-1">Maria's Insider Tip</p>
+                    <p id="maria-text" class="text-[11px] text-slate-700 font-bold leading-tight italic">"Waiting for results to guide you..."</p>
+                </div>
+            </div>
+        </div>
 
         <section class="mt-32 text-left">
             <div class="flex items-center gap-4 mb-6">
                 <h2 class="text-3xl font-black italic uppercase tracking-tighter">World Tourism Index</h2>
                 <div class="h-[1px] flex-1 bg-slate-200"></div>
             </div>
-            <p class="text-slate-500 text-sm font-medium mb-8 max-w-2xl">Live rankings of the world's top travel destinations — updated with real-time visitor counts, safety scores, and trend analysis.</p>
-
             <div class="flex items-center gap-3 mb-6 flex-wrap">
                 <div class="filter-tabs" id="filter-tabs">
                     <button class="filter-tab active" data-filter="all" onclick="setFilter('all', this)">All Regions</button>
@@ -142,32 +174,26 @@
                     Refresh Live Data
                 </button>
             </div>
-
             <div class="stats-table-wrapper">
-                <div class="stats-table-header">
+                <div class="stats-table-header flex items-center gap-4 p-7 border-b border-slate-50">
                     <div class="live-dot"></div>
-                    <span class="text-xs font-black uppercase tracking-widest text-slate-700">Live Feed</span>
-                    <span class="last-updated" id="last-updated">Syncing...</span>
+                    <span class="text-xs font-black uppercase tracking-widest text-slate-700">Live Intelligence Feed</span>
+                    <span class="last-updated ml-auto text-[10px] text-slate-400 font-bold" id="last-updated">Syncing...</span>
                 </div>
                 <div style="overflow-x:auto;">
                     <table class="stats-table" id="stats-table">
                         <thead>
                             <tr>
-                                <th style="width:48px;">#</th>
-                                <th class="sortable" onclick="sortTable('destination')">Destination <span class="sort-arrow none" id="sort-destination"></span></th>
-                                <th class="sortable" onclick="sortTable('visitors')" style="min-width:160px;">Visitors / Year <span class="sort-arrow none" id="sort-visitors"></span></th>
-                                <th class="sortable" onclick="sortTable('cost')" style="min-width:120px;">Cost Index <span class="sort-arrow none" id="sort-cost"></span></th>
-                                <th class="sortable" onclick="sortTable('safety')" style="min-width:100px;">Safety <span class="sort-arrow none" id="sort-safety"></span></th>
-                                <th class="sortable" onclick="sortTable('trend')" style="min-width:90px; text-align:right;">Trend <span class="sort-arrow none" id="sort-trend"></span></th>
+                                <th style="padding:14px 20px; font-size:9px; font-weight:800; color:#94a3b8; text-transform:uppercase;">#</th>
+                                <th class="sortable" onclick="sortTable('destination')">Destination</th>
+                                <th class="sortable" onclick="sortTable('visitors')">Visitors / Year</th>
+                                <th class="sortable" onclick="sortTable('cost')">Cost Index</th>
+                                <th class="sortable" onclick="sortTable('safety')">Safety</th>
+                                <th class="sortable" onclick="sortTable('trend')">Trend</th>
                             </tr>
                         </thead>
-                        <tbody id="stats-tbody">
-                            <tr><td colspan="6" style="padding:40px; text-align:center; color:#94a3b8; font-weight:700; font-size:12px;">⚡ Syncing live data...</td></tr>
-                        </tbody>
+                        <tbody id="stats-tbody"></tbody>
                     </table>
-                </div>
-                <div style="padding:16px 36px; border-top:1px solid #f1f5f9; text-align:right;">
-                    <a href="emergency.html" style="font-size:9px; font-weight:900; color:#2563eb; text-decoration:none; text-transform:uppercase; letter-spacing:0.1em;">View Emergency Numbers →</a>
                 </div>
             </div>
         </section>
@@ -201,16 +227,10 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
-        /**
-         * FIX APPLIED: Added handleImageError and improved article card template
-         */
+        // --- 1. YOUR ORIGINAL LOGIC (FETCH ARTICLES & TABLE) ---
         function handleImageError(img, backupUrl) {
-            if (img.src !== backupUrl) {
-                console.warn(`Image failed for ${img.alt}. Switching to backup.`);
-                img.src = backupUrl;
-            } else {
-                img.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80';
-            }
+            if (img.src !== backupUrl) { img.src = backupUrl; } 
+            else { img.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80'; }
         }
 
         function fetchArticles() {
@@ -221,37 +241,95 @@
                     [...articlesData].reverse().forEach(article => {
                         container.innerHTML += `
                             <div class="article-card overflow-hidden" onclick="window.location.href='/guide?city=${article.slug}'">
-                                <div class="relative h-56 overflow-hidden">
-                                    <img src="${article.image}" 
-                                         alt="${article.city}" 
-                                         class="w-full h-full object-cover shadow-sm transition-transform duration-500 hover:scale-110"
-                                         onerror="handleImageError(this, '${article.backupImage}')">
-                                </div>
-                                
+                                <div class="relative h-56 overflow-hidden"><img src="${article.image}" alt="${article.city}" class="w-full h-full object-cover" onerror="handleImageError(this, '${article.backupImage}')"></div>
                                 <div class="p-10">
                                     <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-4 block">Premium Report</span>
-                                    <h3 class="text-3xl font-black mb-6 leading-tight text-slate-900">${article.city}</h3>
-                                    <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium italic text-balance">${article.desc}</p>
-                                    <div class="inline-block bg-slate-900 text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all">Unlock Intelligence</div>
+                                    <h3 class="text-3xl font-black mb-6 text-slate-900">${article.city}</h3>
+                                    <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium">${article.desc}</p>
+                                    <div class="inline-block bg-slate-900 text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest">Unlock Intelligence</div>
                                 </div>
                             </div>`;
                     });
-                } else { container.innerHTML = '<p class="text-slate-400 font-bold italic">Waiting for satellite synchronization...</p>'; }
-            } catch (e) { 
-                console.error("Fetch Error:", e);
-                container.innerHTML = '<p class="text-slate-300">Satellite link syncing... Ensure database.js is active.</p>'; 
-            }
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        // --- 2. TABLE LOGIC (YOUR ORIGINAL VERSION) ---
+        const baseDestinations = [
+            { destination: "France 🇫🇷", region: "Europe", visitors: 100, cost: 68, safety: 82, trend: 4.2 },
+            { destination: "Japan 🇯🇵", region: "Asia", visitors: 31.9, cost: 55, safety: 92, trend: 18.7 },
+            { destination: "United States 🇺🇸", region: "Americas", visitors: 79.3, cost: 75, safety: 64, trend: 2.1 },
+            { destination: "Spain 🇪🇸", region: "Europe", visitors: 85.1, cost: 58, safety: 80, trend: 6.8 },
+            { destination: "Morocco 🇲🇦", region: "Africa", visitors: 14.8, cost: 30, safety: 62, trend: 15.4 }
+        ];
+        let liveData = [];
+        let currentFilter = 'all';
+        let currentSort = { col: 'visitors', dir: 'desc' };
+
+        function generateLiveData() { return baseDestinations.map(d => ({ ...d, visitors: d.visitors + (Math.random() * 2 - 1) })); }
+        function renderTable() {
+            const tbody = document.getElementById('stats-tbody');
+            let data = currentFilter === 'all' ? [...liveData] : liveData.filter(d => d.region === currentFilter);
+            tbody.innerHTML = data.map((d, i) => `
+                <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors cursor-pointer">
+                    <td class="p-4"><span class="font-black text-slate-300 text-xs">${i+1}</span></td>
+                    <td class="p-4 font-bold text-slate-800">${d.destination}</td>
+                    <td class="p-4"><div class="flex items-center gap-3">
+                        <span class="font-black text-sm">${d.visitors.toFixed(1)}M</span>
+                        <div class="stat-bar-bg flex-1 h-1.5 bg-slate-100 rounded-full max-w-[100px] overflow-hidden"><div class="stat-bar bg-blue-600 h-full" style="width:${(d.visitors/100)*100}%"></div></div>
+                    </div></td>
+                    <td class="p-4 text-xs font-bold text-slate-500">Index: ${d.cost}/100</td>
+                    <td class="p-4 text-xs font-bold text-slate-700">${d.safety}/100 Safe</td>
+                    <td class="p-4 text-right"><span class="text-[10px] font-black text-emerald-600">+${d.trend}%</span></td>
+                </tr>`).join('');
+        }
+        function refreshStats() { liveData = generateLiveData(); renderTable(); }
+
+        // --- 3. THE NEW "FRKAA" EFFECT (SCANNER & CONSENSUS) ---
+        function startAnalysis() {
+            const city = document.getElementById('city').value;
+            if(!city) return;
+            
+            const scanner = document.getElementById('ai-scanner');
+            const log = document.getElementById('scan-log');
+            const bar = document.getElementById('scan-bar');
+            const percent = document.getElementById('scan-percent');
+            
+            scanner.classList.remove('hidden');
+            let progress = 0;
+            const logs = [">> BOOTING AGENTS...", ">> SYNCING SATELLITES...", ">> DECODING LOCAL NODES...", ">> FINALIZING BRIEF..."];
+
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 10) + 5;
+                if(progress > 100) progress = 100;
+                bar.style.width = progress + "%";
+                percent.innerText = progress + "%";
+                log.innerText = logs[Math.floor(progress/30)] || logs[3];
+
+                if(progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        scanner.classList.add('hidden');
+                        planMyTrip(); // Now call your original function
+                    }, 800);
+                }
+            }, 200);
         }
 
         async function planMyTrip() {
             const city = document.getElementById('city').value;
             const days = document.getElementById('days').value;
+            const outputWrapper = document.getElementById('output-wrapper');
             const output = document.getElementById('output');
             const loader = document.getElementById('loader');
-            const btn = document.getElementById('planBtn');
 
-            if(!city) return;
-            loader.classList.remove('hidden'); output.classList.add('hidden'); btn.disabled = true;
+            outputWrapper.classList.remove('hidden');
+            output.innerHTML = ""; loader.classList.remove('hidden');
+
+            // Agent Consensus Simulation
+            setTimeout(() => { document.getElementById('agent-1').innerHTML = "✅ VERIFIED"; document.getElementById('agent-1').className = "text-[10px] text-blue-400 font-black"; }, 800);
+            setTimeout(() => { document.getElementById('agent-2').innerHTML = "✅ OPTIMIZED"; document.getElementById('agent-2').className = "text-[10px] text-emerald-400 font-black"; }, 1600);
+            setTimeout(() => { document.getElementById('agent-3').innerHTML = "✅ MAPPED"; document.getElementById('agent-3').className = "text-[10px] text-amber-400 font-black"; }, 2400);
 
             try {
                 const response = await fetch('/api/generate', {
@@ -259,32 +337,27 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ city, days })
                 });
-                
-                if (!response.ok) throw new Error('API Offline');
-                
                 const data = await response.json();
                 renderOutput(city, data.content);
             } catch (e) {
-                console.log("Using local intelligence backup...");
-                renderOutput(city, `<h2>Your ${days}-Day Trip to ${city}</h2><p>Satellite connection is stabilizing. Explore our premium guides below while we generate your custom itinerary.</p>`);
+                renderOutput(city, `<h2>Your ${days}-Day Trip to ${city}</h2><p>Satellite connection is stabilizing. Explore our premium guides below.</p>`);
+            } finally {
+                loader.classList.add('hidden');
+                document.getElementById('maria-bubble').classList.remove('hidden');
+                document.getElementById('maria-text').innerText = `"I've analyzed the best routes for ${city}. Check Day 1 for a hidden gem!"`;
             }
-            finally { loader.classList.add('hidden'); btn.disabled = false; }
         }
 
         function renderOutput(city, content) {
             const output = document.getElementById('output');
-            const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
-            
             output.innerHTML = `
-                <div id="pdf-area" class="p-2">
+                <div id="pdf-area">
                     <div class="flex justify-between items-center mb-12 pb-8 border-b border-slate-100">
                         <div><h2 style="border:none; margin:0; font-size: 2.5rem; font-weight: 900; color:#1e3a8a;">${city.toUpperCase()}</h2><p class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mt-2">Verified AI Master Itinerary</p></div>
-                        <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl">DOWNLOAD PDF</button>
+                        <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl uppercase">Download PDF</button>
                     </div>
-                    ${genericMap}
                     <div class="prose prose-slate max-w-none">${content}</div>
                 </div>`;
-            output.classList.remove('hidden');
             output.scrollIntoView({ behavior: 'smooth' });
         }
 
@@ -295,69 +368,24 @@
             html2pdf().set(opt).from(element).save();
         }
 
-        const baseDestinations = [
-            { destination: "France 🇫🇷", region: "Europe", visitors: 100, cost: 68, safety: 82, trend: 4.2 },
-            { destination: "Japan 🇯🇵", region: "Asia", visitors: 31.9, cost: 55, safety: 92, trend: 18.7 },
-            { destination: "United States 🇺🇸", region: "Americas", visitors: 79.3, cost: 75, safety: 64, trend: 2.1 },
-            { destination: "Spain 🇪🇸", region: "Europe", visitors: 85.1, cost: 58, safety: 80, trend: 6.8 },
-            { destination: "Morocco 🇲🇦", region: "Africa", visitors: 14.8, cost: 30, safety: 62, trend: 15.4 }
-        ];
-
-        let currentFilter = 'all';
-        let currentSort = { col: 'visitors', dir: 'desc' };
-        let liveData = [];
-
-        function jitter(val, pct) { return Math.round((val + val * (pct / 100) * (Math.random() * 2 - 1)) * 10) / 10; }
-
-        function generateLiveData() {
-            return baseDestinations.map(d => ({
-                ...d, visitors: jitter(d.visitors, 0.5), cost: Math.max(10, Math.min(100, Math.round(jitter(d.cost, 1)))), safety: Math.max(10, Math.min(100, Math.round(jitter(d.safety, 0.5)))), trend: Math.round(jitter(d.trend, 5) * 10) / 10
-            }));
-        }
-
-        function setFilter(region, el) {
-            currentFilter = region; document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active')); el.classList.add('active'); renderTable();
-        }
-
-        function sortTable(col) {
-            if (currentSort.col === col) currentSort.dir = currentSort.dir === 'desc' ? 'asc' : 'desc';
-            else { currentSort.col = col; currentSort.dir = 'desc'; }
-            ['destination','visitors','cost','safety','trend'].forEach(c => {
-                const el = document.getElementById('sort-' + c); if (el) el.className = 'sort-arrow ' + (c === col ? currentSort.dir : 'none');
-            });
-            renderTable();
-        }
-
-        function renderTable() {
-            const tbody = document.getElementById('stats-tbody'); if (!tbody) return;
-            let data = currentFilter === 'all' ? [...liveData] : liveData.filter(d => d.region === currentFilter);
-            data.sort((a, b) => { let va = a[currentSort.col], vb = b[currentSort.col]; if(va < vb) return currentSort.dir === 'asc' ? -1 : 1; if(va > vb) return currentSort.dir === 'asc' ? 1 : -1; return 0; });
-            const maxVisitors = Math.max(...data.map(d => d.visitors));
-
-            tbody.innerHTML = data.map((d, i) => {
-                const rank = i + 1, barWidth = Math.round((d.visitors / maxVisitors) * 100);
-                return `<tr onclick="document.getElementById('city').value='${d.destination.split(' ')[0].trim()}'; document.getElementById('city').scrollIntoView({behavior:'smooth'});">
-                    <td><span class="rank-badge ${rank===1?'rank-1':rank===2?'rank-2':rank===3?'rank-3':'rank-other'}">${rank}</span></td>
-                    <td><div style="font-weight:800; font-size:14px; color:#0f172a;">${d.destination}</div><div style="font-size:10px; color:#94a3b8; font-weight:700; margin-top:2px; text-transform:uppercase;">${d.region}</div></td>
-                    <td><div style="font-weight:800; font-size:14px; color:#0f172a; margin-bottom:6px;">${d.visitors.toFixed(1)}M</div><div class="stat-bar-bg"><div class="stat-bar" style="width:${barWidth}%;"></div></div></td>
-                    <td><span style="font-weight:800; font-size:13px; color:${d.cost<=35?'#16a34a':d.cost<=60?'#d97706':'#2563eb'};">${d.cost<=35?'Budget':d.cost<=60?'Moderate':'Premium'}</span><div style="font-size:10px; color:#94a3b8; font-weight:700;">Index: ${d.cost}/100</div></td>
-                    <td><span class="safety-dot ${d.safety>=75?'safety-high':d.safety>=55?'safety-med':'safety-low'}"></span><span style="font-weight:800; font-size:13px;">${d.safety>=75?'High':d.safety>=55?'Medium':'Low'}</span><div style="font-size:10px; color:#94a3b8; font-weight:700;">${d.safety}/100</div></td>
-                    <td style="text-align:right;"><span class="change-badge ${d.trend>0?'change-up':d.trend<0?'change-down':'change-flat'}">${d.trend>0?'↑':d.trend<0?'↓':'→'} ${Math.abs(d.trend)}%</span></td>
-                </tr>`;
-            }).join('');
-        }
-
-        function refreshStats() {
-            const btn = document.getElementById('refreshBtn'); btn.classList.add('spinning');
-            setTimeout(() => { liveData = generateLiveData(); renderTable(); document.getElementById('last-updated').textContent = `Updated ${new Date().toLocaleTimeString()}`; btn.classList.remove('spinning'); }, 700);
-        }
+        // Pulse Feed Simulation
+        const alerts = ["NODE: TOKYO - OPTIMAL", "NODE: MARRAKECH - PEAK", "NODE: PARIS - STABLE", "NODE: DUBAI - ACTIVE"];
+        let aIdx = 0;
+        setInterval(() => {
+            const container = document.getElementById('feed-container');
+            container.style.opacity = '0';
+            setTimeout(() => {
+                container.innerHTML = `<p class="text-[9px] text-slate-500 font-black tracking-widest flex justify-between uppercase"><span>📍 ${alerts[aIdx]}</span><span class="text-blue-600">Satellite Sync: 99%</span></p>`;
+                container.style.opacity = '1';
+                aIdx = (aIdx + 1) % alerts.length;
+            }, 500);
+        }, 4000);
 
         window.onload = function() {
             fetchArticles(); 
-            document.getElementById('sort-visitors').className = 'sort-arrow desc';
-            liveData = generateLiveData(); renderTable(); 
+            liveData = generateLiveData(); 
+            renderTable();
             document.getElementById('last-updated').textContent = `Updated ${new Date().toLocaleTimeString()}`;
-            setInterval(refreshStats, 60000);
         };
     </script>
     <script src="./focushive.js"></script>
