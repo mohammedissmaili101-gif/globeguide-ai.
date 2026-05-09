@@ -82,7 +82,6 @@
         .sort-arrow.desc::after { content: '↓'; }
         .sort-arrow.none::after { content: '↕'; }
 
-        /* ستايل لإخفاء الـ H1 الإضافي للـ SEO */
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
     </style>
 </head>
@@ -204,7 +203,6 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
-        // ✅ تحسين جلب المقالات (نقطة كلاود 3 و 4)
         function fetchArticles() {
             const container = document.getElementById('dynamic-articles');
             try {
@@ -212,7 +210,7 @@
                     container.innerHTML = '';
                     [...articlesData].reverse().forEach(article => {
                         container.innerHTML += `
-                            <div class="article-card p-10" onclick="window.location.href='${article.slug}'">
+                            <div class="article-card p-10" onclick="window.location.href='guide.html?city=${article.slug}'">
                                 <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-4 block">Premium Report</span>
                                 <h3 class="text-3xl font-black mb-6 leading-tight text-slate-900">${article.city}</h3>
                                 <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium italic text-balance">${article.desc}</p>
@@ -245,7 +243,6 @@
                 const data = await response.json();
                 renderOutput(city, data.content);
             } catch (e) {
-                // ✅ حل مؤقت إذا كان الـ API معطل (نقطة كلاود 5)
                 console.log("Using local intelligence backup...");
                 renderOutput(city, `<h2>Your ${days}-Day Trip to ${city}</h2><p>Satellite connection is stabilizing. Explore our premium guides below while we generate your custom itinerary.</p>`);
             }
@@ -276,7 +273,6 @@
             html2pdf().set(opt).from(element).save();
         }
 
-        // --- Live Stats Logic (بقات كيم هي) ---
         const baseDestinations = [
             { destination: "France 🇫🇷", region: "Europe", visitors: 100, cost: 68, safety: 82, trend: 4.2 },
             { destination: "Japan 🇯🇵", region: "Asia", visitors: 31.9, cost: 55, safety: 92, trend: 18.7 },
