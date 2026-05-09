@@ -70,7 +70,7 @@ const articlesData = [
             
             <p><strong>Insider Tip:</strong> Rent a traditional Hanbok dress for the day. Not only does it make for stunning photographs against the palace walls, but wearing one also grants you free entry into all the major grand palaces in the city, like Gyeongbokgung.</p>
         `
-    }
+    },
     {
         "slug": "istanbul",
         "city": "Istanbul",
@@ -142,8 +142,8 @@ const articlesData = [
             
             <p><strong>Insider Tip:</strong> Download a real-time "Density Mapping" app. In 2026, these are essential for finding the quietest times to visit popular spots like the Tsukiji Outer Market or the TeamLab digital art installations.</p>
         `
-        }
-           {
+    },
+    {
         "slug": "marrakech",
         "city": "Marrakech",
         "desc": "The Red City: A sensory journey through ancient palaces and future-proof luxury.",
@@ -205,8 +205,8 @@ const articlesData = [
             
             <p><strong>Insider Tip:</strong> Skip the famous Tram 28—it's often too crowded to see anything. Instead, take Tram 18 toward Ajuda. You get the same vintage wooden interiors and beautiful views of the river without the heavy tourist queues.</p>
         `
-        }
-            {
+    },
+    {
         "slug": "los-angeles",
         "city": "Los Angeles",
         "desc": "Dreaming in technicolor: The 2026 guide to the city of angels and cinematic suns.",
@@ -268,8 +268,8 @@ const articlesData = [
             
             <p><strong>Insider Tip:</strong> Head to the Temple of Debod at sunset. It’s an authentic ancient Egyptian temple gifted to Spain, and it offers the most spectacular, unobstructed view of the Royal Palace as the sky turns a deep, royal purple.</p>
         `
-        }
-            {
+    },
+    {
         "slug": "mexico-city",
         "city": "Mexico City",
         "desc": "A high-altitude explosion of color, ancient Aztec echoes, and a world-class culinary revolution.",
@@ -281,7 +281,7 @@ const articlesData = [
             <p>Walking through the neighborhoods of Roma and Condesa is like walking through a dream of Art Deco elegance and lush, overgrown greenery. These are the creative lungs of the city. In 2026, these areas have pioneered "Biophilic Urbanism," where cafe terraces are literally integrated into mini-forests. Spend your morning browsing independent bookstores or visiting the house of Frida Kahlo (La Casa Azul) in nearby Coyoacán to understand how the city’s painful history fuels its vibrant, colorful present.</p>
             
             <h3>A Gastronomic Pilgrimage</h3>
-            <p>The culinary landscape of Mexico City is a masterpiece of contrast. You can have a 12-course tasting menu at Pujol, one of the world's best restaurants, and then follow it up with a 1-dollar 'Taco al Pastor' from a street corner in San Rafael that tastes just as divine. The secret is the chili, the lime, and the thousand-year-old technique of nixtamalization. In 2026, CDMX has introduced "Food Heritage Trails" that guide you through secret markets where you can taste rare Oaxacan moles and artisanal mezcal directly from the producers.</p>
+            <p>The culinary landscape of Mexico City is a masterpiece of contrast. You can have a 12-course tasting menu at Pujol, one of the world's best restaurants, and then follow it up with a 1-dollar 'Taco al Pastor' from a street corner in San Rafael that tastes just as divine. The secret is the chili, the lime, and the thousand-year-old technique of nixtamalization. In 2026, CDMX has introduced "Food Heritage Trails" that guide you through secret markets where you can taste rare Oaxacan moles and artisanal mecal directly from the producers.</p>
             
             <h3>The Sun and Moon Pyramids</h3>
             <p>No visit is complete without the short trip to Teotihuacán. Standing at the foot of the Pyramid of the Sun, you feel the sheer weight of time. In 2026, new AR (Augmented Reality) platforms allow you to see the pyramids as they were in 400 AD—painted in brilliant reds and golds. It’s a spiritual experience that reminds you that long before the skyscrapers, this was already the center of a sophisticated universe.</p>
@@ -340,8 +340,8 @@ const articlesData = [
             
             <p><strong>SEO Strategy:</strong> Using terms like "Vertical Eco-City" and "Intangible Cultural Heritage" helps your site rank for "Future Travel Trends 2026," a niche that is growing rapidly in search engine volume.</p>
         `
-        }
-            {
+    },
+    {
         "slug": "rio-de-janeiro",
         "city": "Rio de Janeiro",
         "desc": "The Marvelous City: A high-octane blend of samba, sea salt, and jungle-covered peaks.",
@@ -445,8 +445,8 @@ const articlesData = [
             
             <p><strong>Insider Tip:</strong> Drive to Boulders Beach to see the African Penguin colony. In 2026, new underwater viewing decks allow you to see these "jackass penguins" swimming in their natural habitat without disturbing them.</p>
         `
-    }
-     {
+    },
+    {
         "slug": "singapore",
         "city": "Singapore",
         "desc": "The Garden City of 2026: Where hyper-modern biophilic design meets a futuristic culinary soul.",
@@ -552,4 +552,3 @@ const articlesData = [
         `
     }
 ];
-        
