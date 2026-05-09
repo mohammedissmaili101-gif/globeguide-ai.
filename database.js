@@ -2,6 +2,7 @@ const articlesData = [
     {
         "slug": "barcelona",
         "city": "Barcelona",
+        "image": "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1200&q=80",
         "desc": "Sun-drenched cathedrals, surrealist dreams, and the soulful rhythm of Catalonia.",
         "content": `
             <h2>Barcelona: A Mediterranean Masterpiece</h2>
@@ -26,6 +27,7 @@ const articlesData = [
     {
         "slug": "sydney",
         "city": "Sydney",
+        "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=80",
         "desc": "Emerald harbors, thriving surf culture, and the ultimate coastal luxury.",
         "content": `
             <h2>Sydney: The Emerald Jewel of the South</h2>
@@ -50,6 +52,7 @@ const articlesData = [
     {
         "slug": "seoul",
         "city": "Seoul",
+        "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=1200&q=80",
         "desc": "Hyper-tech neon dreams meet the quiet dignity of ancient dynasties.",
         "content": `
             <h2>Seoul: The Future is Already Here</h2>
@@ -74,6 +77,7 @@ const articlesData = [
     {
         "slug": "istanbul",
         "city": "Istanbul",
+        "image": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=80",
         "desc": "The eternal bridge between two continents, where spice-scented history meets modern cool.",
         "content": `
             <h2>Istanbul: The Bridge of Empires</h2>
@@ -98,6 +102,7 @@ const articlesData = [
     {
         "slug": "berlin",
         "city": "Berlin",
+        "image": "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1200&q=80",
         "desc": "A raw, unfiltered masterpiece of history, techno, and absolute freedom.",
         "content": `
             <h2>Berlin: The Unfiltered Soul of Europe</h2>
@@ -122,6 +127,7 @@ const articlesData = [
     {
         "slug": "tokyo",
         "city": "Tokyo",
+        "image": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80",
         "desc": "Neo-Zen intelligence: A hyper-modern sanctuary where tradition meets the future.",
         "content": `
             <h2>Tokyo: The Pulse of Neo-Zen</h2>
@@ -146,6 +152,7 @@ const articlesData = [
     {
         "slug": "marrakech",
         "city": "Marrakech",
+        "image": "https://images.unsplash.com/photo-1597212618440-806262de4fe1?auto=format&fit=crop&w=1200&q=80",
         "desc": "The Red City: A sensory journey through ancient palaces and future-proof luxury.",
         "content": `
             <h2>Marrakech: The Red City Reimagined</h2>
@@ -167,6 +174,7 @@ const articlesData = [
     {
         "slug": "rome",
         "city": "Rome",
+        "image": "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1200&q=80",
         "desc": "The Eternal City: A living museum of sun-baked stone, pasta, and timeless elegance.",
         "content": `
             <h2>Rome: The Heartbeat of the World</h2>
@@ -188,6 +196,7 @@ const articlesData = [
     {
         "slug": "lisbon",
         "city": "Lisbon",
+        "image": "https://images.unsplash.com/photo-1548126032-079a0fb0099d?auto=format&fit=crop&w=1200&q=80",
         "desc": "Yellow trams, fado echoes, and the brilliant Atlantic light of Europe's western edge.",
         "content": `
             <h2>Lisbon: The City of Seven Hills</h2>
@@ -209,6 +218,7 @@ const articlesData = [
     {
         "slug": "los-angeles",
         "city": "Los Angeles",
+        "image": "https://images.unsplash.com/photo-1515895309261-da226c154021?auto=format&fit=crop&w=1200&q=80",
         "desc": "Dreaming in technicolor: The 2026 guide to the city of angels and cinematic suns.",
         "content": `
             <h2>Los Angeles: The Technicolor Dream</h2>
@@ -230,6 +240,7 @@ const articlesData = [
     {
         "slug": "bangkok",
         "city": "Bangkok",
+        "image": "https://images.unsplash.com/photo-1508009603885-50cf7c579367?auto=format&fit=crop&w=1200&q=80",
         "desc": "Golden temples, hyper-modern skyscrapers, and the world's most vibrant street food soul.",
         "content": `
             <h2>Bangkok: The Golden Chaos</h2>
@@ -251,6 +262,7 @@ const articlesData = [
     {
         "slug": "madrid",
         "city": "Madrid",
+        "image": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=80",
         "desc": "Golden plazas, royal art, and the electric energy of the city that never sleeps.",
         "content": `
             <h2>Madrid: The Heart of the Sun</h2>
@@ -272,6 +284,7 @@ const articlesData = [
     {
         "slug": "mexico-city",
         "city": "Mexico City",
+        "image": "https://images.unsplash.com/photo-1512813195391-450745524451?auto=format&fit=crop&w=1200&q=80",
         "desc": "A high-altitude explosion of color, ancient Aztec echoes, and a world-class culinary revolution.",
         "content": `
             <h2>Mexico City: The Infinite Metropolis</h2>
@@ -296,6 +309,7 @@ const articlesData = [
     {
         "slug": "vienna",
         "city": "Vienna",
+        "image": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80",
         "desc": "Imperial grandeur, secret wine gardens, and the quiet luxury of Europe's musical heart.",
         "content": `
             <h2>Vienna: The Symphony of Elegance</h2>
@@ -320,6 +334,7 @@ const articlesData = [
     {
         "slug": "hong-kong",
         "city": "Hong Kong",
+        "image": "https://images.unsplash.com/photo-1506354666786-959d6d497f1a?auto=format&fit=crop&w=1200&q=80",
         "desc": "A vertical neon jungle where ancient mountains meet the electric energy of the South China Sea.",
         "content": `
             <h2>Hong Kong: The Electric Forest</h2>
@@ -344,6 +359,7 @@ const articlesData = [
     {
         "slug": "rio-de-janeiro",
         "city": "Rio de Janeiro",
+        "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=1200&q=80",
         "desc": "The Marvelous City: A high-octane blend of samba, sea salt, and jungle-covered peaks.",
         "content": `
             <h2>Rio de Janeiro: The Rhythm of the Earth</h2>
@@ -365,6 +381,7 @@ const articlesData = [
     {
         "slug": "copenhagen",
         "city": "Copenhagen",
+        "image": "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80",
         "desc": "The capital of 'Hygge': Scandinavian design, cycling culture, and the world's happiest streets.",
         "content": `
             <h2>Copenhagen: The Blueprint for the Future</h2>
@@ -386,6 +403,7 @@ const articlesData = [
     {
         "slug": "prague",
         "city": "Prague",
+        "image": "https://images.unsplash.com/photo-1519677100203-a0e668c92439?auto=format&fit=crop&w=1200&q=80",
         "desc": "A Gothic fairy tale of spires, bridges, and the world's best beer heritage.",
         "content": `
             <h2>Prague: The Golden City of a Hundred Spires</h2>
@@ -407,6 +425,7 @@ const articlesData = [
     {
         "slug": "toronto",
         "city": "Toronto",
+        "image": "https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=80",
         "desc": "A high-rise mosaic of cultures on the edge of the great Lake Ontario.",
         "content": `
             <h2>Toronto: The World’s Living Room</h2>
@@ -428,6 +447,7 @@ const articlesData = [
     {
         "slug": "cape-town",
         "city": "Cape Town",
+        "image": "https://images.unsplash.com/photo-1580619305218-85e4783c164b?auto=format&fit=crop&w=1200&q=80",
         "desc": "Where the mountains hug the sea: A wild, breathtaking masterpiece of the Southern Hemisphere.",
         "content": `
             <h2>Cape Town: The Mother City</h2>
@@ -449,6 +469,7 @@ const articlesData = [
     {
         "slug": "singapore",
         "city": "Singapore",
+        "image": "https://images.unsplash.com/photo-1525598912003-663126343e1f?auto=format&fit=crop&w=1200&q=80",
         "desc": "The Garden City of 2026: Where hyper-modern biophilic design meets a futuristic culinary soul.",
         "content": `
             <h2>Singapore: The Biophilic Blueprint</h2>
@@ -470,6 +491,7 @@ const articlesData = [
     {
         "slug": "dubai",
         "city": "Dubai",
+        "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
         "desc": "The Vertical Frontier: A 2026 guide to the world's most ambitious skyline and desert luxury.",
         "content": `
             <h2>Dubai: The Architecture of Ambition</h2>
@@ -491,6 +513,7 @@ const articlesData = [
     {
         "slug": "florence",
         "city": "Florence",
+        "image": "https://images.unsplash.com/photo-1541085340193-456488173db8?auto=format&fit=crop&w=1200&q=80",
         "desc": "The cradle of the Renaissance: Art, leather, and the golden light of Tuscany.",
         "content": `
             <h2>Florence: The Masterpiece of Europe</h2>
@@ -512,6 +535,7 @@ const articlesData = [
     {
         "slug": "kyoto",
         "city": "Kyoto",
+        "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80",
         "desc": "The heart of old Japan: Zen gardens, tea ceremonies, and 1,200 years of silent beauty.",
         "content": `
             <h2>Kyoto: The Silence of a Thousand Years</h2>
@@ -533,6 +557,7 @@ const articlesData = [
     {
         "slug": "athens",
         "city": "Athens",
+        "image": "https://images.unsplash.com/photo-1503152397458-99626e83fea3?auto=format&fit=crop&w=1200&q=80",
         "desc": "The cradle of democracy: Ancient marble ruins and the electric spirit of modern Greece.",
         "content": `
             <h2>Athens: The Eternal Spark</h2>
