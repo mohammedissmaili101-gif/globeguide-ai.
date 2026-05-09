@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlobeGuide AI | Premium AI Travel Itinerary Planner</title>
     
+    <title>GlobeGuide AI | Premium AI Travel Itinerary Planner</title>
+    <meta name="description" content="Plan your perfect trip with GlobeGuide AI. Get custom itineraries, live travel rankings, and essential safety guides powered by satellite intelligence.">
+    <link rel="canonical" href="https://globeguide-ai.vercel.app/" />
+    
+    <meta property="og:title" content="GlobeGuide AI | Smart Travel Intelligence">
+    <meta property="og:description" content="Stop Searching. Start Exploring with AI-generated travel plans and real-time world stats.">
+    <meta property="og:url" content="https://globeguide-ai.vercel.app/">
+    <meta property="og:type" content="website">
+
     <meta name="google-site-verification" content="pek_oHFsRrtgR_Y6ti-HMARB3N1V5Zg0nqj-YD_eIKc" />
     <meta name="google-site-verification" content="XgriFXyJ2kBxp_XLdOugWo2Q3ifdF8wil6UqHaD877E" />
     
@@ -12,12 +20,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <script src="database.js"></script>
+    <script src="./database.js"></script>
 
     <style>
         :root { --primary: #2563eb; --bg: #f8fafc; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #0f172a; overflow-x: hidden; scroll-behavior: smooth; }
         
+        /* الحفاظ على كل الستايلات ديالك الأصلية */
         .prose h2 { font-size: 2.25rem !important; font-weight: 800 !important; color: #1e3a8a !important; margin-top: 3.5rem !important; margin-bottom: 1rem !important; border-left: 6px solid #2563eb; padding-left: 1.5rem; line-height: 1.2; text-transform: uppercase; }
         .prose h3 { font-size: 1.6rem !important; font-weight: 700 !important; color: #2563eb !important; margin-top: 2rem !important; margin-bottom: 0.5rem !important; }
         .prose p { font-size: 1.125rem !important; line-height: 1.8 !important; color: #475569 !important; margin-bottom: 1.5rem !important; }
@@ -30,7 +39,6 @@
         
         #google_translate_element select { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 6px 12px; font-weight: 700; font-size: 12px; outline: none; }
 
-        /* ===== LIVE STATS TABLE STYLES ===== */
         .stats-table-wrapper { background: white; border-radius: 40px; border: 1px solid #f1f5f9; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.04); }
         .stats-table-header { display: flex; align-items: center; gap: 16px; padding: 28px 36px; border-bottom: 1px solid #f1f5f9; }
         .live-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 0 3px rgba(34,197,94,0.2); animation: pulse-green 2s infinite; }
@@ -73,10 +81,15 @@
         .sort-arrow.asc::after { content: '↑'; }
         .sort-arrow.desc::after { content: '↓'; }
         .sort-arrow.none::after { content: '↕'; }
+
+        /* ستايل لإخفاء الـ H1 الإضافي للـ SEO */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
     </style>
 </head>
 
 <body class="hero-mesh min-h-screen">
+    <h1 class="sr-only">GlobeGuide AI - Best AI Travel Planner and Emergency Intelligence Feed</h1>
+
     <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center sticky top-0 z-50 bg-white/50 backdrop-blur-md border-b border-white/20">
         <div class="flex items-center gap-2">
             <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/20">
@@ -93,7 +106,7 @@
     </nav>
 
     <main class="max-w-5xl mx-auto px-6 pt-16 pb-24 text-center">
-        <h1 class="text-5xl md:text-8xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">Stop Searching. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-serif italic">Start Exploring.</span></h1>
+        <p class="text-5xl md:text-8xl font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">Stop Searching. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-serif italic">Start Exploring.</span></p>
         
         <div class="search-container p-3 max-w-4xl mx-auto flex flex-col md:flex-row gap-2">
             <div class="flex-1 flex items-center px-6">
@@ -118,7 +131,7 @@
                 <h2 class="text-3xl font-black italic uppercase tracking-tighter">World Tourism Index</h2>
                 <div class="h-[1px] flex-1 bg-slate-200"></div>
             </div>
-            <p class="text-slate-500 text-sm font-medium mb-8 max-w-2xl">Live rankings of the world's top travel destinations — updated with real-time visitor counts, safety scores, cost indices, and trending momentum.</p>
+            <p class="text-slate-500 text-sm font-medium mb-8 max-w-2xl">Live rankings of the world's top travel destinations — updated with real-time visitor counts, safety scores, and trend analysis.</p>
 
             <div class="flex items-center gap-3 mb-6 flex-wrap">
                 <div class="filter-tabs" id="filter-tabs">
@@ -191,6 +204,7 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
+        // ✅ تحسين جلب المقالات (نقطة كلاود 3 و 4)
         function fetchArticles() {
             const container = document.getElementById('dynamic-articles');
             try {
@@ -205,8 +219,8 @@
                                 <div class="inline-block bg-slate-900 text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all">Unlock Intelligence</div>
                             </div>`;
                     });
-                } else { container.innerHTML = '<p class="text-slate-400 font-bold italic">Waiting for new intelligence reports...</p>'; }
-            } catch (e) { container.innerHTML = '<p class="text-slate-300">Satellite link syncing... Please ensure database.js is uploaded.</p>'; }
+                } else { container.innerHTML = '<p class="text-slate-400 font-bold italic">Waiting for satellite synchronization...</p>'; }
+            } catch (e) { container.innerHTML = '<p class="text-slate-300">Satellite link syncing... Ensure database.js is active.</p>'; }
         }
 
         async function planMyTrip() {
@@ -225,32 +239,44 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ city, days })
                 });
+                
+                if (!response.ok) throw new Error('API Offline');
+                
                 const data = await response.json();
-
-                const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
-
-                output.innerHTML = `
-                    <div id="pdf-area" class="p-2">
-                        <div class="flex justify-between items-center mb-12 pb-8 border-b border-slate-100">
-                            <div><h2 style="border:none; margin:0; font-size: 2.5rem; font-weight: 900; color:#1e3a8a;">${city.toUpperCase()}</h2><p class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mt-2">Verified AI Master Itinerary</p></div>
-                            <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl">DOWNLOAD PDF</button>
-                        </div>
-                        ${genericMap}
-                        <div class="prose prose-slate max-w-none">${data.content}</div>
-                    </div>`;
-                output.classList.remove('hidden');
-                output.scrollIntoView({ behavior: 'smooth' });
-            } catch (e) { alert("Error generating intelligence."); }
+                renderOutput(city, data.content);
+            } catch (e) {
+                // ✅ حل مؤقت إذا كان الـ API معطل (نقطة كلاود 5)
+                console.log("Using local intelligence backup...");
+                renderOutput(city, `<h2>Your ${days}-Day Trip to ${city}</h2><p>Satellite connection is stabilizing. Explore our premium guides below while we generate your custom itinerary.</p>`);
+            }
             finally { loader.classList.add('hidden'); btn.disabled = false; }
+        }
+
+        function renderOutput(city, content) {
+            const output = document.getElementById('output');
+            const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
+            
+            output.innerHTML = `
+                <div id="pdf-area" class="p-2">
+                    <div class="flex justify-between items-center mb-12 pb-8 border-b border-slate-100">
+                        <div><h2 style="border:none; margin:0; font-size: 2.5rem; font-weight: 900; color:#1e3a8a;">${city.toUpperCase()}</h2><p class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mt-2">Verified AI Master Itinerary</p></div>
+                        <button onclick="downloadPDF()" class="text-[10px] font-black bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition shadow-xl">DOWNLOAD PDF</button>
+                    </div>
+                    ${genericMap}
+                    <div class="prose prose-slate max-w-none">${content}</div>
+                </div>`;
+            output.classList.remove('hidden');
+            output.scrollIntoView({ behavior: 'smooth' });
         }
 
         function downloadPDF() {
             const element = document.getElementById('pdf-area');
-            const cityName = document.getElementById('city').value;
+            const cityName = document.getElementById('city').value || 'Trip';
             const opt = { margin: 0.5, filename: `GlobeGuide-${cityName}.pdf`, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } };
             html2pdf().set(opt).from(element).save();
         }
 
+        // --- Live Stats Logic (بقات كيم هي) ---
         const baseDestinations = [
             { destination: "France 🇫🇷", region: "Europe", visitors: 100, cost: 68, safety: 82, trend: 4.2 },
             { destination: "Japan 🇯🇵", region: "Asia", visitors: 31.9, cost: 55, safety: 92, trend: 18.7 },
@@ -292,7 +318,7 @@
 
             tbody.innerHTML = data.map((d, i) => {
                 const rank = i + 1, barWidth = Math.round((d.visitors / maxVisitors) * 100);
-                return `<tr onclick="document.getElementById('city').value='${d.destination.replace(/ 🇫🇷|🇪🇸|🇺🇸|🇯🇵|🇲🇦/g,'').trim()}'; document.getElementById('city').scrollIntoView({behavior:'smooth'});">
+                return `<tr onclick="document.getElementById('city').value='${d.destination.split(' ')[0].trim()}'; document.getElementById('city').scrollIntoView({behavior:'smooth'});">
                     <td><span class="rank-badge ${rank===1?'rank-1':rank===2?'rank-2':rank===3?'rank-3':'rank-other'}">${rank}</span></td>
                     <td><div style="font-weight:800; font-size:14px; color:#0f172a;">${d.destination}</div><div style="font-size:10px; color:#94a3b8; font-weight:700; margin-top:2px; text-transform:uppercase;">${d.region}</div></td>
                     <td><div style="font-weight:800; font-size:14px; color:#0f172a; margin-bottom:6px;">${d.visitors.toFixed(1)}M</div><div class="stat-bar-bg"><div class="stat-bar" style="width:${barWidth}%;"></div></div></td>
@@ -316,6 +342,6 @@
             setInterval(refreshStats, 60000);
         };
     </script>
-    <script src="focushive.js"></script>
+    <script src="./focushive.js"></script>
 </body>
 </html>
