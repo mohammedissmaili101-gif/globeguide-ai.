@@ -33,7 +33,7 @@
         .hero-mesh { background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%); }
         .search-container { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.06); border-radius: 40px; }
         
-        .article-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: white; border-radius: 35px; border: 1px solid #f1f5f9; cursor: pointer; }
+        .article-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: white; border-radius: 35px; border: 1px solid #f1f5f9; cursor: pointer; overflow: hidden; }
         .article-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.08); border-color: #2563eb; }
         
         #google_translate_element select { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 6px 12px; font-weight: 700; font-size: 12px; outline: none; }
@@ -208,11 +208,15 @@
                     container.innerHTML = '';
                     [...articlesData].reverse().forEach(article => {
                         container.innerHTML += `
-                            <div class="article-card p-10" onclick="window.location.href='/guide?city=${article.slug}'">
-                                <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-4 block">Premium Report</span>
-                                <h3 class="text-3xl font-black mb-6 leading-tight text-slate-900">${article.city}</h3>
-                                <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium italic text-balance">${article.desc}</p>
-                                <div class="inline-block bg-slate-900 text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all">Unlock Intelligence</div>
+                            <div class="article-card" onclick="window.location.href='/guide?city=${article.slug}'">
+                                <img src="${article.image}" alt="${article.city}" class="w-full h-56 object-cover shadow-sm mb-2">
+                                
+                                <div class="p-10">
+                                    <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-4 block">Premium Report</span>
+                                    <h3 class="text-3xl font-black mb-6 leading-tight text-slate-900">${article.city}</h3>
+                                    <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium italic text-balance">${article.desc}</p>
+                                    <div class="inline-block bg-slate-900 text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all">Unlock Intelligence</div>
+                                </div>
                             </div>`;
                     });
                 } else { container.innerHTML = '<p class="text-slate-400 font-bold italic">Waiting for satellite synchronization...</p>'; }
@@ -249,7 +253,7 @@
 
         function renderOutput(city, content) {
             const output = document.getElementById('output');
-            const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
+            const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://google.com/maps?q=${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
             
             output.innerHTML = `
                 <div id="pdf-area" class="p-2">
