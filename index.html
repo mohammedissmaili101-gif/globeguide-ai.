@@ -201,6 +201,18 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
+        /**
+         * FIX APPLIED: Added handleImageError and improved article card template
+         */
+        function handleImageError(img, backupUrl) {
+            if (img.src !== backupUrl) {
+                console.warn(`Image failed for ${img.alt}. Switching to backup.`);
+                img.src = backupUrl;
+            } else {
+                img.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80';
+            }
+        }
+
         function fetchArticles() {
             const container = document.getElementById('dynamic-articles');
             try {
@@ -208,8 +220,13 @@
                     container.innerHTML = '';
                     [...articlesData].reverse().forEach(article => {
                         container.innerHTML += `
-                            <div class="article-card" onclick="window.location.href='/guide?city=${article.slug}'">
-                                <img src="${article.image}" alt="${article.city}" class="w-full h-56 object-cover shadow-sm mb-2">
+                            <div class="article-card overflow-hidden" onclick="window.location.href='/guide?city=${article.slug}'">
+                                <div class="relative h-56 overflow-hidden">
+                                    <img src="${article.image}" 
+                                         alt="${article.city}" 
+                                         class="w-full h-full object-cover shadow-sm transition-transform duration-500 hover:scale-110"
+                                         onerror="handleImageError(this, '${article.backupImage}')">
+                                </div>
                                 
                                 <div class="p-10">
                                     <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-4 block">Premium Report</span>
@@ -220,7 +237,10 @@
                             </div>`;
                     });
                 } else { container.innerHTML = '<p class="text-slate-400 font-bold italic">Waiting for satellite synchronization...</p>'; }
-            } catch (e) { container.innerHTML = '<p class="text-slate-300">Satellite link syncing... Ensure database.js is active.</p>'; }
+            } catch (e) { 
+                console.error("Fetch Error:", e);
+                container.innerHTML = '<p class="text-slate-300">Satellite link syncing... Ensure database.js is active.</p>'; 
+            }
         }
 
         async function planMyTrip() {
@@ -253,7 +273,7 @@
 
         function renderOutput(city, content) {
             const output = document.getElementById('output');
-            const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://google.com/maps?q=${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
+            const genericMap = `<iframe width="100%" height="450" style="border-radius:30px; margin-bottom:40px; border:none; box-shadow: 0 4px 20px rgba(0,0,0,0.05);" src="https://maps.google.com/maps?q=${encodeURIComponent(city)}&output=embed" frameborder="0"></iframe>`;
             
             output.innerHTML = `
                 <div id="pdf-area" class="p-2">
