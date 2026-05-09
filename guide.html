@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">GlobeGuide AI | Premium Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="database.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .prose h2 { font-size: 2.5rem; font-weight: 800; color: #1e3a8a; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose h3 { font-size: 1.8rem; font-weight: 700; color: #2563eb; margin-top: 1.5rem; }
+        .prose p { font-size: 1.25rem; line-height: 1.8; color: #334155; margin-bottom: 1.5rem; }
+        .prose ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; font-size: 1.1rem; }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <div class="relative h-[60vh] bg-slate-900 overflow-hidden">
+        <img id="hero-img" src="" class="w-full h-full object-cover opacity-50 scale-105">
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+            <span class="text-blue-400 font-bold tracking-[0.3em] uppercase text-sm mb-4">Satellite Verified Intelligence</span>
+            <h1 id="main-title" class="text-white text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4"></h1>
+            <div id="city-badge" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold text-sm uppercase tracking-widest">Global Node 2026</div>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto -mt-20 relative z-10 bg-white shadow-2xl rounded-[50px] p-8 md:p-20 mb-20">
+        <div id="content" class="prose prose-slate max-w-none">
+            </div>
+        
+        <div class="mt-16 pt-16 border-t border-slate-100 flex flex-col items-center text-center">
+            <p class="text-slate-400 font-bold uppercase text-xs tracking-widest mb-4">Powered by Focushive Intelligence</p>
+            <a href="index.html" class="bg-slate-900 text-white px-10 py-4 rounded-full font-black text-sm hover:bg-blue-600 transition-all uppercase tracking-widest">Return to Dashboard</a>
+        </div>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const citySlug = params.get('city');
+        const data = articlesData.find(a => a.slug === citySlug);
+
+        if(data) {
+            document.getElementById('page-title').innerText = data.city + " | 2026 Travel Intelligence";
+            document.getElementById('main-title').innerText = data.city;
+            document.getElementById('content').innerHTML = data.content;
+            
+            // جلب صورة احترافية من Unsplash بشكل ديناميكي حسب اسم المدينة
+            document.getElementById('hero-img').src = `https://source.unsplash.com/1600x900/?${data.city},city,architecture`;
+        } else {
+            window.location.href = 'index.html'; // إيلا مالقاش المدينة يرجع للرئيسية
+        }
+    </script>
+</body>
+</html>
