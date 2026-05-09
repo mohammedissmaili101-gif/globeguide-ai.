@@ -378,3 +378,61 @@ const articlesData = [
         `
     }
 ];
+
+/**
+ * دالة جلب المقالات مع ميزة معالجة خطأ الصور
+ * تضمن ظهور الصور مدى الحياة عبر استخدام الروابط الاحتياطية
+ */
+function fetchArticles() {
+    const container = document.getElementById('dynamic-articles');
+    try {
+        if(typeof articlesData !== 'undefined' && articlesData.length > 0) {
+            container.innerHTML = '';
+            // عرض المقالات (ترتيب عكسي لإظهار الأحدث)
+            [...articlesData].reverse().forEach(article => {
+                container.innerHTML += `
+                    <div class="article-card overflow-hidden cursor-pointer" onclick="window.location.href='/guide?city=${article.slug}'">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="${article.image}" 
+                                 alt="${article.city}" 
+                                 class="w-full h-full object-cover shadow-sm transition-transform duration-500 hover:scale-110"
+                                 onerror="handleImageError(this, '${article.backupImage}')">
+                        </div>
+                        
+                        <div class="p-10">
+                            <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-4 block">Premium Report</span>
+                            <h3 class="text-3xl font-black mb-6 leading-tight text-slate-900">${article.city}</h3>
+                            <p class="text-slate-500 text-sm mb-8 leading-relaxed font-medium italic text-balance">${article.desc}</p>
+                            <div class="inline-block bg-slate-900 text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all">Unlock Intelligence</div>
+                        </div>
+                    </div>`;
+            });
+        } else { 
+            container.innerHTML = '<p class="p-10 text-slate-400 font-bold italic">Waiting for satellite synchronization...</p>'; 
+        }
+    } catch (e) { 
+        console.error("Fetch Error:", e);
+        container.innerHTML = '<p class="p-10 text-slate-300">Satellite link syncing... Ensure database is active.</p>'; 
+    }
+}
+
+/**
+ * وظيفة معالجة الخطأ: تحول للصورة الاحتياطية
+ * وإذا فشل الاحتياطي، تضع صورة افتراضية نهائية
+ */
+function handleImageError(img, backupUrl) {
+    // إذا لم تكن الصورة هي بالفعل الصورة الاحتياطية
+    if (img.src !== backupUrl) {
+        console.warn(`Original image failed for ${img.alt}. Switching to backup.`);
+        img.src = backupUrl;
+    } else {
+        // إذا فشل حتى الرابط الاحتياطي، نضع صورة عامة للسفر لضمان شكل الموقع
+        console.error(`Both images failed for ${img.alt}. Using global fallback.`);
+        img.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80';
+    }
+}
+
+// تنفيذ الجلب عند تحميل الصفحة
+window.onload = function() {
+    fetchArticles();
+};
