@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI War Room | Real-Time Intel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono&display=swap');
+        body { font-family: 'Space Grotesk', sans-serif; background: #020617; color: #94a3b8; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-border { border: 1px solid; border-image: linear-gradient(to right, #1e293b, #334155, #1e293b) 1; }
+    </style>
+</head>
+<body class="p-6 md:p-12 min-h-screen">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-12">
+            <a href="index.html" class="mono text-[10px] text-slate-500 hover:text-emerald-400 transition uppercase tracking-[0.3em]">
+                <i class="fas fa-chevron-left mr-2"></i> Return to Index
+            </a>
+            <div class="flex items-center gap-4 bg-slate-900/50 px-4 py-2 rounded-full border border-slate-800">
+                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]"></div>
+                <span class="mono text-[10px] text-emerald-500 uppercase tracking-widest">System Online: Live Intelligence</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <div class="lg:col-span-1 bg-slate-900/30 border border-slate-800 p-8 rounded-[2.5rem] flex flex-col justify-center text-center">
+                <h3 class="mono text-[10px] uppercase mb-4 tracking-[0.2em] text-slate-500">Global Stability Index</h3>
+                <div id="stability-score" class="text-6xl font-bold text-white mb-2">--</div>
+                <p id="stability-status" class="text-[10px] uppercase font-black text-emerald-500 tracking-tighter">Analyzing Data...</p>
+                <div class="mt-8 h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                    <div id="stability-bar" class="h-full bg-emerald-500 transition-all duration-1000" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3 space-y-6">
+                <h2 class="text-3xl font-bold text-white tracking-tighter italic">Live Intelligence <span class="text-slate-700">Stream</span></h2>
+                <div id="intel-feed" class="grid gap-4">
+                    <div class="animate-pulse h-24 bg-slate-900/50 rounded-3xl"></div>
+                    <div class="animate-pulse h-24 bg-slate-900/50 rounded-3xl"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadIntelligence() {
+            try {
+                const res = await fetch('/api/intelligence');
+                const { analysis } = await res.json();
+                
+                const feed = document.getElementById('intel-feed');
+                feed.innerHTML = '';
+                
+                let totalScore = 0;
+
+                analysis.forEach(item => {
+                    totalScore += item.impactScore;
+                    const colorClass = item.impactScore > 60 ? 'text-emerald-500' : 'text-amber-500';
+                    const bgClass = item.impactScore > 60 ? 'bg-emerald-500/5' : 'bg-amber-500/5';
+                    
+                    feed.innerHTML += `
+                        <div class="${bgClass} border border-slate-800 p-6 rounded-3xl flex justify-between items-center group hover:border-slate-600 transition-all">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="mono text-[9px] uppercase font-bold text-slate-500">${item.source}</span>
+                                    <span class="h-px w-8 bg-slate-800"></span>
+                                    <span class="mono text-[9px] uppercase font-bold ${colorClass}">Safety: ${item.impactScore}%</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-slate-200 line-clamp-1">${item.headline}</h4>
+                            </div>
+                            <div class="text-right">
+                                <div class="mono text-[10px] text-slate-600 uppercase">Region</div>
+                                <div class="text-xs font-bold text-white uppercase">${item.region}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Update Stability Index
+                const avg = Math.round(totalScore / analysis.length);
+                document.getElementById('stability-score').innerText = avg + '%';
+                document.getElementById('stability-bar').style.width = avg + '%';
+                document.getElementById('stability-status').innerText = avg > 60 ? 'Stable for Travel' : 'Proceed with Caution';
+                document.getElementById('stability-status').className = `text-[10px] uppercase font-black tracking-tighter ${avg > 60 ? 'text-emerald-500' : 'text-amber-500'}`;
+
+            } catch (e) {
+                console.error("Uplink lost");
+            }
+        }
+
+        loadIntelligence();
+    </script>
+</body>
+</html>
