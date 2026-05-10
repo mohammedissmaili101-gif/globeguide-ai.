@@ -3,6 +3,11 @@
   <url><loc>https://globeguide-ai.vercel.app/</loc><lastmod>2026-05-10</lastmod><priority>1.0</priority></url>
   <url><loc>https://globeguide-ai.vercel.app/emergency.html</loc><lastmod>2026-05-10</lastmod><priority>0.9</priority></url>
 
+  <url><loc>https://globeguide-ai.vercel.app/war-room.html</loc><lastmod>2026-05-10</lastmod><priority>0.9</priority></url>
+  <url><loc>https://globeguide-ai.vercel.app/travel-alerts.html</loc><lastmod>2026-05-10</lastmod><priority>0.9</priority></url>
+  <url><loc>https://globeguide-ai.vercel.app/travel-news.html</loc><lastmod>2026-05-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://globeguide-ai.vercel.app/travel-deals.html</loc><lastmod>2026-05-10</lastmod><priority>0.8</priority></url>
+
   <url><loc>https://globeguide-ai.vercel.app/london-guide.html</loc><lastmod>2026-05-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://globeguide-ai.vercel.app/paris-guide.html</loc><lastmod>2026-05-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://globeguide-ai.vercel.app/tokyo-guide.html</loc><lastmod>2026-05-10</lastmod><priority>0.8</priority></url>
