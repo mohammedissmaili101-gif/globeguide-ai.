@@ -7,22 +7,34 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-slate-950 text-slate-200">
-    <main class="max-w-6xl mx-auto px-4 py-12">
-        <div class="flex items-center gap-3 mb-8">
-            <div class="w-3 h-3 bg-emerald-500 rounded-full animate-ping"></div>
-            <span class="font-mono text-emerald-500 text-sm tracking-tighter">BOT STATUS: SCANNING GLOBAL AGENCIES...</span>
+<body class="bg-slate-950 text-slate-200 min-h-screen flex flex-col">
+    
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-12">
+        <div class="flex justify-between items-center mb-12">
+            <a href="index.html" class="group flex items-center gap-2 text-slate-400 hover:text-white transition-all text-xs font-black uppercase tracking-[0.2em]">
+                <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                Return to Base
+            </a>
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
+                <span class="font-mono text-emerald-500 text-[10px] tracking-widest uppercase">Bot: Active</span>
+            </div>
         </div>
         
-        <h1 class="text-4xl font-black text-white mb-4">Latest Travel <span class="text-emerald-500 italic">Deals</span></h1>
-        <p class="text-slate-400 mb-12">Our AI agent scans international sources to find the most recent travel offers and agency updates.</p>
+        <h1 class="text-5xl font-black text-white mb-4 tracking-tighter uppercase">Agency <span class="text-emerald-500 italic font-serif">Deals</span></h1>
+        <p class="text-slate-400 mb-16 max-w-2xl font-medium">AI-driven real-time scan of global travel agencies, promotion hubs, and exclusive vacation packages.</p>
 
-        <div id="deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="col-span-full text-center py-20 text-slate-600 font-mono italic">
-                Gathering real-time offers...
+        <div id="deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="col-span-full text-center py-20">
+                <div class="inline-block w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                <p class="text-slate-500 font-mono text-xs uppercase tracking-widest">Scanning global nodes for offers...</p>
             </div>
         </div>
     </main>
+
+    <footer class="py-12 border-t border-slate-900 text-center">
+        <p class="text-[9px] text-slate-600 font-bold uppercase tracking-[0.3em]">© 2026 GLOBEGUIDE AI | INTELLIGENCE BY FOCUSHIVE</p>
+    </footer>
 
     <script>
         async function fetchDeals() {
@@ -30,19 +42,31 @@
             try {
                 const res = await fetch('/api/deals');
                 const data = await res.json();
+                
+                if(!data.articles || data.articles.length === 0) {
+                    grid.innerHTML = '<p class="col-span-full text-center text-slate-500 font-mono uppercase text-xs">No active deals found in this scan. Try again later.</p>';
+                    return;
+                }
+
                 grid.innerHTML = '';
-                data.articles.slice(0, 12).forEach(deal => {
+                data.articles.slice(0, 15).forEach(deal => {
                     grid.innerHTML += `
-                        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl hover:border-emerald-500/50 transition duration-500">
-                            <img src="${deal.urlToImage || 'https://via.placeholder.com/400x200'}" class="w-full h-40 object-cover rounded-xl mb-4">
-                            <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded font-bold uppercase">${deal.source.name}</span>
-                            <h3 class="font-bold text-white mt-3 mb-2 line-clamp-2">${deal.title}</h3>
-                            <p class="text-slate-500 text-xs line-clamp-3 mb-4">${deal.description || ''}</p>
-                            <a href="${deal.url}" target="_blank" class="block text-center bg-white text-black py-2 rounded-lg text-xs font-black hover:bg-emerald-500 hover:text-white transition">VIEW DEAL</a>
+                        <div class="group bg-slate-900/50 border border-slate-800 p-6 rounded-[2rem] hover:border-emerald-500/40 hover:bg-slate-900 transition-all duration-500 flex flex-col h-full">
+                            <div class="relative overflow-hidden rounded-2xl mb-6 h-44">
+                                <img src="${deal.urlToImage || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80'}" 
+                                     class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                                <div class="absolute top-3 right-3 bg-emerald-500 text-black text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-xl">Live Deal</div>
+                            </div>
+                            <span class="text-[9px] font-black text-emerald-500 uppercase tracking-widest mb-2">${deal.source.name}</span>
+                            <h3 class="font-bold text-white text-lg mb-3 line-clamp-2 leading-tight">${deal.title}</h3>
+                            <p class="text-slate-500 text-xs line-clamp-3 mb-6 leading-relaxed italic">${deal.description || 'Access full details via the link below.'}</p>
+                            <div class="mt-auto pt-6 border-t border-slate-800">
+                                <a href="${deal.url}" target="_blank" class="block text-center bg-white text-black py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-emerald-500 hover:text-white transition-all transform hover:scale-[1.02]">Explore Offer</a>
+                            </div>
                         </div>`;
                 });
             } catch (e) {
-                grid.innerHTML = '<p class="text-red-400">Failed to connect to the bot.</p>';
+                grid.innerHTML = '<p class="text-red-500 font-mono text-xs uppercase">Scan Error: Uplink Failed.</p>';
             }
         }
         fetchDeals();
